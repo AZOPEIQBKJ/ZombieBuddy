@@ -36,7 +36,7 @@ public class ZombieBuddy {
     }
     
     public static String getFullVersionString() {
-        return "ZombieBuddy v" + version;
+        return "ZombieBuddy Community v" + version;
     }
 
     public static void setAutoFixModOrder(boolean value) {

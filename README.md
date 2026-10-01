@@ -1,5 +1,7 @@
 # ZombieBuddy
 
+> **ZombieBuddy Community maintenance fork:** use [the community README](README-COMMUNITY.md) for this preview. The text and download links below document the original upstream project by Zed.
+
 A powerful framework for Project Zomboid modders that enables Java bytecode manipulation and runtime patching of game classes using ByteBuddy.
 
 ## What is ZombieBuddy?
