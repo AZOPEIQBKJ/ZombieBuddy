@@ -28,7 +28,11 @@ Lire le guide d'installation et de retour arrière du paquet, conserver un seul 
 
 ## Frozen artefacts / Artefacts figés
 
-The source commit and ZIP SHA-256 will be filled from the frozen manifest before upload. Attach the named ZIP, its `manifest.json` and `SHA256SUMS.txt`.
+Source: `4fb488eacaa704c709710fef767adb21465b90c9`.
+
+ZIP: `ZombieBuddyCommunity-2.3.3-community.2.zip`. SHA-256: `a83b1455deae4d32234cd8179c71b36c7c96811d58ae74b7c78d408e3bddad33`.
+
+Agent SHA-256: `365744cb6037be4ed5575201fdc398401e3805f1c1cbdb3ad3a585844165b63a`. Attach the named ZIP, its `manifest.json` and `SHA256SUMS.txt`.
 
 Signing identity: Aftermath Systems, Ed25519 `.zbs`, not Zed's X.509 signature. Public key: `989ac279f40f1a35fa0616645e319fc44cde9a15a842b7c365870147bfff3ce0`. Establish this key independently from the maintainer's verified identity, not solely from the download carrying it.
 
