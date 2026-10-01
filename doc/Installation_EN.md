@@ -2,6 +2,8 @@
 
 Version 2.3.3-community.4 is based on Zed's ZombieBuddy 2.3.3. The audited target is PZ 42.21.0. It fixes the dotted-version compatibility rejection observed in community.3. Local checks do not establish gameplay or dedicated-server acceptance. The loading fix is integrated; no Aftermath compatibility JAR is required.
 
+The accepted release journey includes a one-time Community installation/migration, comparable to the original framework installation, then activation with existing dependent mods unchanged. The separate [Community Windows installer preview](CommunityInstaller.md) automates the normal Steam route, with locally checked backups and rollback. Its actual Steam/game acceptance remains pending. The manual runtime-only procedure below remains available; its ZIP has not been changed to include the installer.
+
 ## Preflight
 
 Close the game normally, or stop the server. Back up files and launch settings before replacing anything. Check package hashes against `manifest.json`. The `.jar.zbs` signature identifies Aftermath Systems; it is not Zed's X.509 signature.

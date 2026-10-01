@@ -1,0 +1,48 @@
+package main
+
+import (
+	"os"
+	"os/exec"
+	"path/filepath"
+	"strings"
+	"testing"
+)
+
+func TestWindowsJunctionRefused(t *testing.T) {
+	loc, payload, hash := fixture(t)
+	destination := filepath.Join(t.TempDir(), "preserve")
+	if err := os.Mkdir(destination, 0755); err != nil {
+		t.Fatal(err)
+	}
+	link := filepath.Join(loc.Profile, "mods", "ZombieBuddy")
+	quote := func(s string) string { return "'" + strings.ReplaceAll(s, "'", "''") + "'" }
+	command := "New-Item -ItemType Junction -Path " + quote(link) + " -Value " + quote(destination) + " -ErrorAction Stop | Out-Null"
+	if output, err := exec.Command("powershell.exe", "-NoProfile", "-NonInteractive", "-Command", command).CombinedOutput(); err != nil {
+		t.Fatalf("cannot create fixture junction: %v %s", err, output)
+	}
+	if _, err := buildPlan(loc, payload, hash); err == nil {
+		t.Fatal("junction target accepted")
+	}
+	if _, err := os.Stat(destination); err != nil {
+		t.Fatal("junction target lost")
+	}
+}
+
+func TestConcurrentInstallerLock(t *testing.T) {
+	game := t.TempDir()
+	release, err := acquireInstallationLock(game)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if second, err := acquireInstallationLock(game); err == nil {
+		second()
+		release()
+		t.Fatal("second installer acquired the same directory")
+	}
+	release()
+	after, err := acquireInstallationLock(game)
+	if err != nil {
+		t.Fatal("lock not released", err)
+	}
+	after()
+}

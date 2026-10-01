@@ -20,7 +20,7 @@
   "uploaded": false,
   "publicReleaseReady": false,
   "outstanding": [
-    "Resolve the primary subscription/activation bootstrap without changes to dependent mods",
+    "Prepare and verify the accepted one-time Community installation/migration and deterministic distribution selection without changes to dependent mods",
     "Community.4 development deployment verified after session recovery; new solo session GO and actual acceptance pending",
     "Observe representative approval rendering and persistent decisions, save/reload and selected installation route",
     "Obtain Host and dedicated/client evidence before claiming those environments",
@@ -47,7 +47,10 @@
   "soloSessionStatus": "BLOCKED_RESULT_RECOVERED_CORRECTION_DEPLOYED_NOT_GAME_ACCEPTED",
   "githubDraftBlocked": true,
   "nextDevelopmentCandidate": "2.3.3-community.4",
-  "primaryObjective": "Transparent replacement for unchanged existing ZombieBuddy mods through subscription and activation",
+  "primaryObjective": "Compatible replacement for unchanged existing ZombieBuddy mods after an accepted one-time Community installation/migration and activation",
+  "oneTimeCommunityInstallationAcceptedOn": "2026-10-01",
+  "subscriptionOnlyMigrationRequired": false,
+  "communityInstallerReady": false,
   "subscriptionOnlyMigrationVerified": false,
   "githubDraftVersion": "2.3.3-community.3",
   "installedLocalVersion": "2.3.3-community.4"

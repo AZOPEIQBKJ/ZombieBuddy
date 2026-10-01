@@ -1,6 +1,6 @@
 # ZombieBuddy Community 2.3.3-community.3 — development preview
 
-**BLOCKED historical draft: do not publish.** Actual 2026-10-01 solo loading rejected Living Hordes because the dotted Community version was miscompared. A separate Community.4 correction is prepared locally; the subscription-only migration requirement remains unresolved. The assets below are retained unchanged as evidence.
+**BLOCKED historical draft: do not publish.** Actual 2026-10-01 solo loading rejected Living Hordes because the dotted Community version was miscompared. A separate Community.4 correction is prepared locally. The maintainer subsequently accepted a one-time Community installation/migration; its distributable installer and player journey remain unverified. The assets below are retained unchanged as evidence.
 
 Independent maintenance of ZombieBuddy 2.3.3 by Andrey "Zed" Zaikin. The PZ 42.21 List-based loading fix is integrated into the framework; the public 2.x ArrayList entry point is retained. No Aftermath compatibility adapter is required.
 

@@ -4,7 +4,7 @@ Independent maintenance of [ZombieBuddy by Andrey "Zed" Zaikin](https://github.c
 
 **The PZ 42.21 loading fix is integrated into ZombieBuddy itself. No separate Aftermath compatibility adapter is needed.**
 
-**Current status: development candidate `2.3.3-community.4`.** 160 Java tests and isolated checks pass. Community.3 failed actual consumer loading; .4 corrects that version-filter failure locally and awaits a new game session. The [primary goal is transparent replacement for unchanged existing mods](doc/DropInCompatibility.md), including the subscription/activation journey; that bootstrap is not yet solved. No public Community binary or Workshop item is published. Save/reload, Host, dedicated and multiplayer acceptance remain pending.
+**Current status: development candidate `2.3.3-community.4`.** 160 Java tests and isolated checks pass. Community.3 failed actual consumer loading; .4 corrects that version-filter failure locally and awaits a new game session. The [primary goal is compatible replacement for unchanged existing mods](doc/DropInCompatibility.md), with a one-time Community installation/migration followed by activation. The [Community Windows installer preview](doc/CommunityInstaller.md) has local migration/rollback tests and engine-level selection evidence; its actual Steam/game journey remains pending. No public Community binary or Workshop item is published. Save/reload, Host, dedicated and multiplayer acceptance remain pending.
 
 ## Players
 
@@ -14,9 +14,9 @@ Independent maintenance of [ZombieBuddy by Andrey "Zed" Zaikin](https://github.c
 
 The community distribution uses English throughout its interface, documentation and publication materials.
 
-Keep **one** active distribution with Mod ID `ZombieBuddy`, and **one** effective ZombieBuddy agent across all launch settings. Existing 2.x namespaces and the Mod ID are preserved for compatibility. A mod that hard-codes the original Workshop item may still need a dependency update by its maintainer. Installing the framework does not automatically port every dependent mod to 42.21.
+Keep **one** active distribution with Mod ID `ZombieBuddy`, and **one** effective ZombieBuddy agent across all launch settings. Existing 2.x namespaces and the Mod ID are preserved for compatibility. Handling existing dependencies on the original Workshop item without changes by consumer maintainers is a Community migration requirement that remains to be verified. Installing the framework does not automatically port every dependent mod to 42.21.
 
-Updates are manual. The original Windows installer is not a community installer. The candidate includes a Java agent and its `.zbs` signature; no installer, native DLL or game files are distributed. Mod approvals and signature checks remain active. Only run Java mods from sources you trust: they execute with the permissions of the game process.
+Updates are manual. The original Windows installer is not a community installer. A separate offline Community installer preview embeds the frozen runtime and configures the standard Java-agent route; no native DLL or game files are bundled. The original runtime-only ZIP stays unchanged. Mod approvals and signature checks remain active. Only run Java mods from sources you trust: they execute with the permissions of the game process.
 
 ## Developers
 

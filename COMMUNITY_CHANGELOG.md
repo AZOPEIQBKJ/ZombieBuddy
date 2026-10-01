@@ -1,5 +1,13 @@
 # Community changes
 
+## Windows installer 0.1.0-preview.1
+
+- Add a separate offline Community installer for the normal Windows Steam launcher. Embed and verify the immutable Community.4 runtime archive and Community Ed25519 signature; no new runtime build, native DLL, private key or game binary is included.
+- Preserve dependent mods, saves, approvals, unrelated JVM arguments and Steam account data. Consolidate the effective ZombieBuddy agent and remove only the exact obsolete Aftermath 42.21 adapter entry. Select local mods before Workshop copies, with that global duplicate-ID effect displayed in the preview.
+- Add preview, rechecked preconditions, a process-lifetime installer lock, atomic writes, hashed backups, interruption recovery and rollback that retains unrelated Steam edits. The Steam backup contains only the PZ option edit.
+- Exercise fresh/migrated installations, repeated runs, failed writes, changed files, recovery, ambiguous launch settings and Windows junction rejection locally. Real B42 filesystem/metadata code selects Community with the installed order while retaining an unchanged consumer, using a simulated installed-item list.
+- No actual installer-driven game launch or multiplayer acceptance is claimed. The existing runtime-only archives remain immutable.
+
 ## 2.3.3-community.4
 
 - Fix the compatibility comparator so a dotted distribution suffix such as `-community.3` is not read as a fourth numeric API component. The actual solo test of community.3 rejected Living Hordes pinned to API 2.3.3 before its Java code could load.
