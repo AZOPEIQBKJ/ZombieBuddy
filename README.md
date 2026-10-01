@@ -1,119 +1,36 @@
-# ZombieBuddy
+# ZombieBuddy Community
 
-> **ZombieBuddy Community maintenance fork:** use [the community README](README-COMMUNITY.md) for this preview. The text and download links below document the original upstream project by Zed.
+Independent maintenance of [ZombieBuddy by Andrey "Zed" Zaikin](https://github.com/zed-0xff/ZombieBuddy), based on version 2.3.3. Maintained by Aftermath Systems under the original MIT licence, with the upstream history and credits preserved.
 
-A powerful framework for Project Zomboid modders that enables Java bytecode manipulation and runtime patching of game classes using ByteBuddy.
+**The PZ 42.21 loading fix is integrated into ZombieBuddy itself. No separate Aftermath compatibility adapter is needed.**
 
-## What is ZombieBuddy?
+**Current status: local development preview `2.3.3-community.1`.** 148 Java tests and isolated checks against the actual 42.21 game bytecode pass. Real gameplay, save/reload, Host and dedicated-server acceptance remain pending. There is no public community download or Workshop item yet. Linux and macOS support are not established by the Windows checks.
 
-<img src="icon_256.png" align="right" alt="ZombieBuddy Icon" width="128" height="128">
+## Players / Joueurs
 
-ZombieBuddy is a Java agent-based framework that allows modders to:
-- **Patch game classes at runtime** using bytecode manipulation
-- **Expose Java classes to Lua** for enhanced modding capabilities
-- **Apply patches declaratively** using simple annotations
-- **Load Java code from mods** seamlessly
+| English | Français |
+| --- | --- |
+| [Installation, migration and rollback](doc/Installation_EN.md) | [Installation, migration et retour arrière](doc/Installation_FR.md) |
+| [Changes and current limits](COMMUNITY_CHANGELOG.md) | [Préparatifs de publication](publishing/PLAN_FR.md) |
+| [Support and bug reports](SUPPORT.md) | [Support et signalement des bugs](SUPPORT.md) |
 
-Built on top of [ByteBuddy](https://bytebuddy.net/), ZombieBuddy provides a clean, annotation-based API for intercepting and modifying game behavior without requiring access to the game's source code.
+Ce fork vise à maintenir le chargement des mods Java sous PZ 42.21. Le correctif est intégré au framework. La candidate locale est vérifiée au banc ; elle n'est pas encore réceptionnée en partie ou en multijoueur.
 
-### Why ZombieBuddy?
+Keep **one** active distribution with Mod ID `ZombieBuddy`, and **one** effective ZombieBuddy agent across all launch settings. Existing 2.x namespaces and the Mod ID are preserved for compatibility. A mod that hard-codes the original Workshop item may still need a dependency update by its maintainer. Installing the framework does not automatically port every dependent mod to 42.21.
 
-Previously, Java mods for Project Zomboid required bundling `.class` files and manually replacing game files. ZombieBuddy makes this better:
+Updates are manual. The original Windows installer is not a community installer. The candidate includes a Java agent and its `.zbs` signature; no installer, native DLL or game files are distributed. Mod approvals and signature checks remain active. Only run Java mods from sources you trust: they execute with the permissions of the game process.
 
-1. **No manual file replacement**: Automatically loads and applies patches at runtime
-2. **Precise patching**: Patch specific methods with surgical precision - multiple mods can patch the same class without conflicts, and game updates are less likely to break your mod
+## Developers
 
-## Features
+- [Build and local verification](README-COMMUNITY.md)
+- [Evidence, baseline and acceptance limits](doc/CommunityEvidence.md)
+- [Upstream API guide](doc/ModdingGuide.md) — retain 2.x API compatibility; examples are not a blanket B42.21 guarantee.
+- [Publication materials and release gates](publishing/PLAN_FR.md)
 
-- 🎯 **Annotation-based patching**: Use `@Patch` annotations to declare method patches
-- 🔄 **Runtime class transformation**: Patch classes that are already loaded using retransformation
-- 📦 **Automatic patch discovery**: Scans for patch classes automatically
-- 🔗 **Lua integration**: Expose Java classes and global functions to Lua
-- ⚡ **Advice and Method Delegation**: Support for both advice-based and delegation-based patching
-- 🔍 **Verbose logging**: Configurable verbosity levels for debugging
+Build with JDK 25 and the pinned Gradle wrapper, using your legally installed game as a compile/test input. Never include the game JAR or private signing keys in a public repository or release. Legacy Rake/installer workflows retain upstream assumptions; use the community build and packaging instructions.
 
-## Quick Start
+## Credits and licence
 
-### For End Users
+Original framework: **Andrey "Zed" Zaikin**. Community maintenance: **Aftermath Systems**. Related reports and proposals include benoitthore's PR #56 and yuruichang's PR #58; this fork does not incorporate the full PR #58 rewrite. See [MIT licence](LICENSE.txt), [dependency notices](THIRD_PARTY_NOTICES.md) and [visual-asset audit](publishing/ASSETS_AND_LOCALIZATION.md).
 
-1. **Windows**: Download and run [ZombieBuddyInstaller.exe](https://github.com/zed-0xff/ZombieBuddy/releases/tag/windows_installer), then choose the launch modes to patch. The installer also has an uninstall option and shows a confirmation preview before applying changes.
-2. **macOS/Linux**: Copy `ZombieBuddy.jar` to the game directory and add `-javaagent:ZombieBuddy.jar --` to launch options
-
-📖 **[Full Installation Guide](doc/Installation.md)** - Security warnings, manual installation, policy modes
-
-📖 **[Uninstall Guide](doc/Uninstall.md)** - Remove launch options, installed files, and optional config data
-
-### For Modders
-
-1. Add `require=\ZombieBuddy`, `javaJarFile`, and `javaPkgName` to your `mod.info`
-2. Create patches using `@Patch` annotations
-3. Build your JAR and place it in `media/java/`
-
-📖 **[Modding Guide](doc/ModdingGuide.md)** - Complete guide to creating Java mods
-
-## Documentation
-
-| Document | Description |
-|----------|-------------|
-| [Installation Guide](doc/Installation.md) | End-user installation, security, and policy configuration |
-| [Uninstall Guide](doc/Uninstall.md) | Removing ZombieBuddy and optional config data |
-| [Command-Line Parameters](doc/CommandLine.md) | All agent parameters: verbosity, policy, experimental, etc. |
-| [Modding Guide](doc/ModdingGuide.md) | Creating patches, Lua exposure, mod signing, examples |
-| [Mod Signing](doc/ModSigning.md) | What signatures prove, what they do not prove, and how author trust works |
-| [Lua API Reference](doc/LuaAPI.md) | Events, Watches, and Java mod status APIs |
-| [Dev/Debug Functions](doc/DevDebugFunctions.md) | Lua utilities: `zbinspect`, `zbmethods`, `zbgrep`, `zbmap`, etc. |
-
-## Example: Creating a Patch
-
-```java
-import me.zed_0xff.zombie_buddy.Patch;
-
-@Patch(className = "zombie.SomeGameClass", methodName = "someMethod")
-public static class MyPatch {
-    @Patch.OnEnter
-    public static void enter() {
-        System.out.println("Method called!");
-    }
-}
-```
-
-## Example Mods
-
-- **[ZBLuaPerfMon](https://github.com/zed-0xff/ZBLuaPerfMon)** - Real-time Lua performance monitoring
-- **[ZBHelloWorld](https://github.com/zed-0xff/ZBHelloWorld)** - Simple example demonstrating basic patching
-- **[ZBetterWorkshopUpload](https://github.com/zed-0xff/ZBetterWorkshopUpload)** - Workshop integration and Lua exposure
-- **[ZBMacOSHideMenuBar](https://github.com/zed-0xff/ZBMacOSHideMenuBar)** - macOS display patching
-- **[ZBBetterFPS](https://github.com/zed-0xff/ZBBetterFPS)** - Render engine optimization
-- **[ZItemTiers](https://github.com/zed-0xff/ZItemTiers)** - Item rarity with optional Java patches
-
-## Requirements
-
-- **Project Zomboid** (Build 42+)
-- **Java 17** (required by the game)
-- **Gradle** (for building Java mods)
-
-## ☕ Support the Project
-
-If you find ZombieBuddy useful, consider supporting its development:
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/zed_0xff)
-
-## License
-
-Copyright (c) 2025-2026 Andrey "Zed" Zaikin
-
-This project is licensed under a permissive open-source license. See [LICENSE.txt](LICENSE.txt) for details.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit issues or pull requests.
-
-## Links
-
-- **GitHub**: https://github.com/zed-0xff/ZombieBuddy
-- **Steam Workshop**: https://steamcommunity.com/sharedfiles/filedetails/?id=3619862853
-- **Related**: [ZBSpec](https://github.com/zed-0xff/ZBSpec) - Testing framework for PZ mods
-
-## Disclaimer
-
-This mod uses bytecode manipulation to modify game behavior. **Java mods enabled through ZombieBuddy have unrestricted access to your system and can execute arbitrary code.** Use at your own risk. Only install Java mods from trusted sources and review their source code when available.
+The original README and distribution instructions remain in the [upstream 2.3.3 history](https://github.com/zed-0xff/ZombieBuddy/blob/0ddf161c27848f12d09e74de7fadbea9d50e621d/README.md). They describe the original distribution.

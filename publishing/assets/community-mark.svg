@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <title>ZombieBuddy Community mark</title>
+  <rect width="256" height="256" rx="40" fill="#14221f"/>
+  <path d="M32 55h73v22l-43 56h43v25H30v-22l44-56H32z" fill="#d7efae"/>
+  <path d="M122 55h47q42 0 42 29 0 16-15 24 21 8 21 30 0 31-45 31h-50zm26 24v20h20q16 0 16-10 0-10-16-10zm0 43v23h22q19 0 19-11 0-12-19-12z" fill="#d7efae"/>
+  <path d="M37 205h182" stroke="#5bd6b6" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="54" cy="205" r="12" fill="#5bd6b6"/>
+  <circle cx="128" cy="205" r="12" fill="#5bd6b6"/>
+  <circle cx="202" cy="205" r="12" fill="#5bd6b6"/>
+</svg>

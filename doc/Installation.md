@@ -1,5 +1,7 @@
 # ZombieBuddy Installation Guide
 
+> Historical upstream instructions. For ZombieBuddy Community, use [English](Installation_EN.md) or [French](Installation_FR.md) installation and rollback instructions. The upstream installer below does not install the community distribution.
+
 This guide covers installing ZombieBuddy for end users who want to use Java mods.
 
 ---

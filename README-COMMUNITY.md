@@ -1,8 +1,8 @@
 # ZombieBuddy Community
 
-Independent maintenance preview by Aftermath Systems, based on ZombieBuddy 2.3.3 by Andrey "Zed" Zaikin. **The PZ 42.21 loading fix is integrated in this agent. No Aftermath compatibility adapter is required.** The name is provisional pending public release. This is not an official upstream release.
+Independent maintenance preview by Aftermath Systems, based on ZombieBuddy 2.3.3 by Andrey "Zed" Zaikin. **The PZ 42.21 loading fix is integrated in this agent. No Aftermath compatibility adapter is required.** The community name was confirmed on 1 October 2026. This is not an official upstream release.
 
-Fork de maintenance indépendant par Aftermath Systems, basé sur ZombieBuddy 2.3.3 de Zed. **Le correctif PZ 42.21 est intégré dans cet agent. Aucun adaptateur de compatibilité Aftermath n'est requis.** Nom provisoire avant publication. Les réceptions en partie et en multijoueur restent à effectuer.
+Fork de maintenance indépendant par Aftermath Systems, basé sur ZombieBuddy 2.3.3 de Zed. **Le correctif PZ 42.21 est intégré dans cet agent. Aucun adaptateur de compatibilité Aftermath n'est requis.** Nom confirmé le 1er octobre 2026. Les réceptions en partie et en multijoueur restent à effectuer.
 
 - [Installation en français](doc/Installation_FR.md)
 - [Installation in English](doc/Installation_EN.md)
@@ -22,4 +22,4 @@ Run `python tools/test_runtime.py --game GAME_DIRECTORY --jdk JDK_DIRECTORY --ba
 
 After reviewing and committing source, `python tools/package_preview.py --java JAVA_EXECUTABLE --public-key TRUSTED_PUBLIC_KEY_HEX` requires passing JVM reports, a matching runtime-test JAR hash and a valid signature sidecar. It independently verifies the signature using the JDK, then creates a versioned ZIP, per-file manifest and SHA256SUMS without installing or uploading them. A public key included in a download is informational; establish trust from the maintainer's previously verified identity.
 
-The source repository retains the historical upstream README and documentation, whose original download links describe the original project. Use these community instructions for this distribution. The preview archive contains the guides under `doc/` and does not include a Gradle build workspace; build from the source checkout.
+The upstream Git history retains the original README and documentation, whose download links describe the original project. Use these community instructions for this distribution. The preview archive contains the guides under `doc/` and does not include a Gradle build workspace; build from the source checkout. Publication materials were prepared later and do not modify the frozen preview archive.

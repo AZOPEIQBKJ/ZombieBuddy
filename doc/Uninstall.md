@@ -1,5 +1,7 @@
 # Uninstalling ZombieBuddy
 
+> Historical upstream instructions. For ZombieBuddy Community, follow the rollback section of the [English](Installation_EN.md) or [French](Installation_FR.md) community guide and preserve unrelated launch options.
+
 ## Windows
 
 You can uninstall automatically by running `ZombieBuddyInstaller.exe` again and choosing **Uninstall ZombieBuddy**. The installer shows a confirmation preview before applying changes.

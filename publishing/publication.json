@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "preparedOn": "2026-10-01",
+  "name": "ZombieBuddy Community",
+  "nameConfirmed": true,
+  "maintainer": "Aftermath Systems",
+  "githubOwner": "AZOPEIQBKJ",
+  "githubRepository": "ZombieBuddyCommunity",
+  "githubAccountType": "personal",
+  "githubRemoteCreated": false,
+  "recommendedDefaultBranch": "community-42.21",
+  "workshopItemId": null,
+  "initialWorkshopVisibility": "private",
+  "modId": "ZombieBuddy",
+  "upstreamWorkshopIdForCreditOnly": "3619862853",
+  "candidateVersion": "2.3.3-community.1",
+  "candidateSourceCommit": "af69c7fe04e4c82bac42055c2f5072e50e643106",
+  "candidateZipSha256": "2007d4db768970f549367cd9b15d0c52131564670c17e6c173c172f43ac83430",
+  "candidateJarSha256": "a0711c36597795348fa94d31d400e34c04eaa263a4e0a3bb3fb3d6898395eb6a",
+  "uploaded": false,
+  "publicReleaseReady": false,
+  "outstanding": [
+    "Create the remote and verify final URLs after publication instruction",
+    "Replace inherited runtime graphics and complete structured Java FR/EN localization in a new candidate",
+    "Review migration and receive actual solo loading together with Living Hordes",
+    "Record approval persistence, save/reload and supported installation-route evidence",
+    "Receive Host and dedicated/client matrix before claiming those environments",
+    "Document author contact and seek PZ moderation advice for Workshop publication",
+    "Freeze the new candidate, signatures, exact release tag and downloadable asset hashes"
+  ]
+}
