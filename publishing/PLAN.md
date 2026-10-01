@@ -10,7 +10,7 @@ Confirmed identity: **ZombieBuddy Community**, maintained by **AZOPEIQBKJ / Afte
 
 The source branch is public and the repository's default. Issues and private vulnerability reporting are enabled. The signed candidate, installation/rollback guide, licence notices, original artwork, release notes, contact messages and private Workshop folder are prepared. The release remains a **draft prerelease** until actual acceptance. `publication.json` pins the final candidate and remote state.
 
-Publication preparation itself did not change the installation. On 2026-10-01 the maintainer reported all contact messages sent and separately authorized reversible local migration and the designated solo session with Living Hordes. Community.3 is now installed with verified backups, one native agent and reviewed Steam options. No Workshop subscription was changed. The first solo attempt was blocked and then interrupted before cleanup; isolated JVM checks do not establish gameplay, save/reload or multiplayer support.
+Publication preparation itself did not change the installation. On 2026-10-01 the maintainer reported all contact messages sent and separately authorized reversible local migration and the designated solo session with Living Hordes. The local installation was subsequently upgraded to Community.4 with verified backups, one native agent and reviewed Steam options. No Workshop subscription was changed. The first solo attempt was blocked and then interrupted before cleanup; isolated JVM checks do not establish gameplay, save/reload or multiplayer support.
 
 ## Remaining procedure
 
