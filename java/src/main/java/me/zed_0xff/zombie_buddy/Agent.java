@@ -101,14 +101,14 @@ public class Agent {
             for (String entry : entries) {
                 entry = entry.trim();
                 if (!entry.isEmpty()) {
-                    String[] parts = entry.split(":", 2);
-                    if (parts.length != 2) {
+                    int separator = entry.lastIndexOf(':');
+                    if (separator < 0) {
                         Logger.error(
                                 "patches_jar entry must be in format <path>:<package_name>, got: " + entry);
                         continue;
                     }
-                    String jarPath = parts[0].trim();
-                    String packageName = parts[1].trim();
+                    String jarPath = entry.substring(0, separator).trim();
+                    String packageName = entry.substring(separator + 1).trim();
                     if (jarPath.isEmpty() || packageName.isEmpty()) {
                         Logger.error(
                                 "patches_jar entry must have non-empty path and package name, got: " + entry);
