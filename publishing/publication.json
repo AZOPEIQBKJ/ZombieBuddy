@@ -20,7 +20,7 @@
   "uploaded": false,
   "publicReleaseReady": false,
   "outstanding": [
-    "Prepare and verify the accepted one-time Community installation/migration and deterministic distribution selection without changes to dependent mods",
+    "Complete actual normal Steam installation/launch and distribution-selection acceptance without changes to dependent mods; installer and engine-selection fixtures pass",
     "Community.4 development deployment verified after session recovery; new solo session GO and actual acceptance pending",
     "Observe representative approval rendering and persistent decisions, save/reload and selected installation route",
     "Obtain Host and dedicated/client evidence before claiming those environments",
@@ -53,5 +53,20 @@
   "communityInstallerReady": false,
   "subscriptionOnlyMigrationVerified": false,
   "githubDraftVersion": "2.3.3-community.3",
-  "installedLocalVersion": "2.3.3-community.4"
+  "installedLocalVersion": "2.3.3-community.4",
+  "communityInstallerBuilt": true,
+  "communityInstaller": {
+    "version": "0.1.0-preview.2",
+    "sourceCommit": "2e30824885cf31f6112118a84cd40a07d14c20b0",
+    "executableSha256": "cd2b68b5e592353f290f3ae253619d274ce075289df31bd0aaf4126624a143ba",
+    "zipSha256": "417e8be5bce8f8c290c2142e81fb6ebe61b664473212eeb82a1822a833dafe88",
+    "platform": "windows-amd64",
+    "localChecksPassed": true,
+    "gameplayAccepted": false,
+    "appliedToUserInstallation": false,
+    "published": false,
+    "authenticodeSigned": false,
+    "supersedesInstallerVersion": "0.1.0-preview.1",
+    "stage": "LOCAL_CHECKS_PASSED_NOT_GAME_ACCEPTED"
+  }
 }
