@@ -30,12 +30,13 @@
   "githubDefaultBranch": "community-42.21",
   "githubIssuesEnabled": true,
   "githubPrivateVulnerabilityReporting": true,
-  "githubDraftReleaseId": null,
-  "githubDraftReleaseUrl": null,
+  "githubDraftReleaseId": 401195796,
+  "githubDraftReleaseUrl": "https://github.com/AZOPEIQBKJ/ZombieBuddy/releases/tag/untagged-1c6814e35061cfe308cd",
   "githubReleasePublished": false,
-  "githubDraftAssetsVerified": false,
+  "githubDraftAssetsVerified": true,
   "workshopUploaded": false,
   "language": "en",
   "englishOnly": true,
-  "supersededDraftReleaseId": 401187026
+  "supersededDraftReleaseId": 401187026,
+  "supersededDraftRemoved": true
 }
