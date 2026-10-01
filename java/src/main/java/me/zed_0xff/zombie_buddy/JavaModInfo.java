@@ -36,6 +36,7 @@ record JavaModInfo(
     }
 
     static WorkshopItemID workshopItemIdFromInfPath(Path path) {
+        if (path == null) return null;
         WorkshopItemID id = workshopItemIdFromSteamPath(path);
         if (id != null) return id;
 
@@ -48,7 +49,8 @@ record JavaModInfo(
         if (p == null || p.getParent() == null) {
             return null;
         }
-        if (p.getParent().getFileName().toString().equalsIgnoreCase("workshop") && Utils.isSameFile(p.getParent().getParent(), Utils.getCachePath())) {
+        Path parentName = p.getParent().getFileName();
+        if (parentName != null && parentName.toString().equalsIgnoreCase("workshop") && Utils.isSameFile(p.getParent().getParent(), Utils.getCachePath())) {
             return workshopItemIdFromWorkshopTxtIn(p);
         }
         return null;

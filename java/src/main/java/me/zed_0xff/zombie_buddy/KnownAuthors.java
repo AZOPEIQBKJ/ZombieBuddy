@@ -44,10 +44,10 @@ public final class KnownAuthors {
     private static final Pattern SIG_PATTERN =
         Pattern.compile("(\"signature\"\\s*:\\s*\")([0-9a-fA-F]*)(\")");
 
-    private static final HttpClient HTTP = HttpClient.newBuilder()
+    private static final LazyHttpClient HTTP = new LazyHttpClient(() -> HttpClient.newBuilder()
         .connectTimeout(Duration.ofSeconds(10))
         .followRedirects(HttpClient.Redirect.NORMAL)
-        .build();
+        .build());
 
     private static final Type FILE_DATA_TYPE = new TypeToken<FileData>() {}.getType();
 
@@ -193,7 +193,7 @@ public final class KnownAuthors {
                 )
                 .GET()
                 .build();
-            HttpResponse<String> resp = HTTP.send(req, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+            HttpResponse<String> resp = HTTP.get().send(req, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
             if (resp.statusCode() == 200) {
                 return resp.body();
             }

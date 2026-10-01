@@ -40,10 +40,10 @@ public final class ZBSVerifier {
     /** Pubkey may appear anywhere in the profile HTML (summary, etc.). */
     private static final Pattern JAVA_MOD_ZBS_IN_HTML = Pattern.compile("JavaModZBS:([0-9a-fA-F]{64})");
 
-    private static final HttpClient HTTP = HttpClient.newBuilder()
+    private static final LazyHttpClient HTTP = new LazyHttpClient(() -> HttpClient.newBuilder()
         .connectTimeout(Duration.ofSeconds(10))
         .followRedirects(HttpClient.Redirect.NORMAL)
-        .build();
+        .build());
 
     private ZBSVerifier() {}
 
@@ -255,7 +255,7 @@ public final class ZBSVerifier {
             .build();
         HttpResponse<String> resp;
         try {
-            resp = HTTP.send(req, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+            resp = HTTP.get().send(req, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new IOException("Interrupted while fetching Steam profile.", e);
