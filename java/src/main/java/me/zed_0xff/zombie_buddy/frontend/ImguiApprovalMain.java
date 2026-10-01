@@ -1,5 +1,7 @@
 package me.zed_0xff.zombie_buddy.frontend;
 
+import static me.zed_0xff.zombie_buddy.i18n.Messages.text;
+
 import imgui.ImDrawData;
 import imgui.ImFontConfig;
 import imgui.ImGui;
@@ -87,7 +89,7 @@ public final class ImguiApprovalMain {
                 GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 1);
             }
 
-            window = GLFW.glfwCreateWindow(WIDTH, HEIGHT, "ZombieBuddy Java Mod Approval", 0, 0);
+            window = GLFW.glfwCreateWindow(WIDTH, HEIGHT, text("approval.title"), 0, 0);
             if (window == 0) {
                 throw new IllegalStateException("Could not create GLFW window");
             }

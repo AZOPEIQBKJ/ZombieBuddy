@@ -1,36 +1,17 @@
-# Assets, identity and localization before binary publication
+# Community.2 assets and localization
 
-Audit: 1 October 2026. The frozen community.1 ZIP is not rewritten by publication preparation.
+Audit: 1 October 2026. The earlier community.1 archive is preserved separately.
 
-## Visual resources
-
-| Resource | Provenance / next action |
+| Resource | Community.2 provenance |
 | --- | --- |
-| `42/icon_128.png`, `42/icon_256.png` | Upstream graphics retained in community.1. Replace in the next candidate with the prepared community icons. |
-| `java/src/main/resources/zb_icon.png` | Upstream graphic inside the JAR, used by the approval UI. Replace with community artwork before the next build/signature. |
-| `common/media/ui/zb_steam_options_*` (four PNGs) | Upstream installation screenshots; contain original instructions. Audit actual Lua references and replace with newly captured/redacted community instructions or remove only if unused. Do not infer reuse rights for third-party UI merely from the root MIT code licence. |
-| Root `icon_*.png`, `icon.xcf`, `cmdline.*` | Historical source assets; provenance beyond the upstream repository has not been independently established. Replace/remove from the public branch tip where unnecessary; preserve attribution and history. Keeping history is not a rights clearance. |
-| `publishing/assets/community-mark.svg` and generated PNGs | New geometric vector design prepared for this fork; no upstream/game artwork sampled. Use as the new icon. |
-| `publishing/assets/workshop-cover.svg` and PNG | New typographic/geometric cover; explicitly identifies the community distribution. Original SVG retained for resizing. |
+| `42/icon_128.png`, `42/icon_256.png`, root icons | Exports of the original geometric community SVG in `publishing/assets/`. |
+| `java/src/main/resources/zb_icon.png` | Original community icon, integrated before compilation/signing. |
+| `common/media/ui/zb_steam_options_*` | Four unused upstream installation screenshots removed after source-reference review. |
+| `icon.xcf`, `cmdline.png`, `cmdline.xcf` | Removed from the branch tip; historical installation guide replaced with community redirects. |
+| `publishing/assets/workshop-cover.svg` and PNG | Original geometric/typographic cover; no game or upstream artwork sampled. |
 
-New SVG designs and their generated PNG exports are supplied under the repository's MIT licence; original copyright notices remain intact. The wordmark identifies an independent community fork, not an official edition. Final brand review should consider confusion with upstream; do not claim endorsement.
+The new SVGs and PNG exports are supplied under this repository's MIT licence. Upstream code copyright and Git history remain intact. No endorsement is claimed.
 
-Runtime replacements require a new candidate and rechecking asset references and UI layout. A new Workshop cover beside unchanged Contents does not prove that the JAR's icon or old installation screenshots were replaced.
+Approval text is structured in `java/src/main/resources/me/zed_0xff/zombie_buddy/i18n/messages_{en,fr}.properties`, read as UTF-8. Swing, embedded/standalone ImGui, TinyFD and console use the shared catalogue. Signature notices have separate presentation strings; raw diagnostic fields and approval/signature decisions remain unchanged. JVM locale selects French or English; `-Dzombiebuddy.language=fr|en` overrides it and propagates to Swing's child JVM. Later game-language changes are outside this mechanism. Native OS button captions and external technical diagnostics retain their own language.
 
-## FR/EN gaps found in Java source
-
-Lua options and the modified missing-agent notice have FR/EN resources. The following inherited paths still contain literal player-facing English:
-
-| Path under `java/src/main/java/me/zed_0xff/zombie_buddy/` | Texts to extract and translate |
-| --- | --- |
-| `frontend/SwingApprovalMain.java` | Window title, introduction, columns, unsigned/unknown status, trust explanations, persistent decisions, Cancel/Yes/No and tooltips |
-| `frontend/ImguiApprovalMain.java` | Standalone approval title and rendered approval controls/status strings; inspect helper renderers too |
-| `frontend/TinyfdModApprovalFrontend.java` | Prompt, invalid-signature denial, trust warning, dates/statuses |
-| `frontend/ConsoleModApprovalFrontend.java` | Allow/deny prompts, persistence prompt, unknown fields and accepted answer guidance |
-| `ZBSVerifier.java` and approval helpers | User-visible signature/trust notices propagated into those frontends; distinguish stable diagnostic logs from UI copy |
-
-Implement a structured FR/EN catalogue used by all retained frontends. Establish locale resolution from actual engine/JVM and subprocess behavior before coding: approval may occur before the game translations exist, and Swing/ImGui are separate entry points. Do not guess that a Lua translation function is available from early Java bootstrap. Carry the chosen locale to child processes explicitly if required; retain an English fallback for unavailable keys/locales.
-
-Acceptance criteria: matching FR/EN keys and formatting arguments; localized safety/consent semantics unchanged; console EOF still denies; invalid signature still denies; cancellation never grants trust; persisted flags and response protocol unchanged. Test all variants locally through their shared catalogue/protocol; real UI review should cover representative rendered mechanisms without requiring a game launch per string.
-
-No new gameplay API, trust policy or updater is required for this work. There is no complete FR/EN claim for community.1.
+Local verification: 160 Java tests, including locale resolution, catalogue parity/formatting, console `oui`/deny/EOF and invalid signatures; final shaded-JAR UTF-8 and child-process checks pass. See [current evidence](../doc/CommunityRelease2Evidence.md). This is not a claim of observed layout in the actual game: representative approval rendering and persistent decisions still require acceptance.

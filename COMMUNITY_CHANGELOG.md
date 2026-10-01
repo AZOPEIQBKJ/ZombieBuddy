@@ -1,5 +1,15 @@
 # Community changes
 
+## 2.3.3-community.2
+
+- Replace all distributed upstream icons with original community artwork. Remove unused installation screenshots and original graphics source files from the branch tip.
+- Share a structured UTF-8 English/French catalogue across Swing, ImGui (embedded/standalone), TinyFD and console approval interfaces. Resolve language from the JVM locale or `-Dzombiebuddy.language=fr|en`; pass the resolved language to the Swing child JVM.
+- Translate signature notices while retaining raw diagnostic fields, denial rules and the request/response protocol. French console accepts `o`/`oui` as well as existing `y` answers; English retains `y/n`. EOF/cancellation and invalid signatures do not grant approval.
+- Preserve all community.1 loading fixes and manual updates. New signed candidate, distinct version and hashes; community.1 remains immutable.
+- Local Java suite: 115 unit + 30 patched + 15 vanilla = 160 passing tests. Real game-loop/Host/dedicated acceptance remains pending. See [community.2 evidence](doc/CommunityRelease2Evidence.md).
+
+Les interfaces d'approbation Java partagent désormais des textes FR/EN structurés, les icônes sont propres au fork et les anciennes captures inutilisées sont retirées. La langue suit la JVM, avec surcharge explicite `-Dzombiebuddy.language=fr` ou `en` ; elle ne suit pas automatiquement un changement ultérieur dans les options du jeu. Les détails techniques fournis par Java/Steam restent dans leur langue d'origine. Les règles de confiance et les approbations ne sont pas assouplies.
+
 ## 2.3.3-community.1
 
 - Integrate the B42.21 `loadMods(List)` entry/exit advice and in-place ordering. Preserve the public `loadMods(ArrayList)` binary descriptor.

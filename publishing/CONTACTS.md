@@ -12,7 +12,7 @@ I'm AZOPEIQBKJ, working on Project Zomboid mods under Aftermath Systems. I previ
 
 Several of our mods are blocked by ZombieBuddy 2.3.3's loading behavior on PZ 42.21. I have prepared a local maintenance fork, called ZombieBuddy Community, with the List-based loading fix integrated directly into the framework. It preserves the 2.x API, mod approval/signature checks and the original MIT licence and copyright. This is a focused maintenance branch, not the full PR #58 rewrite. Local regression checks pass; actual gameplay and multiplayer acceptance are still pending.
 
-The planned repository is AZOPEIQBKJ/ZombieBuddyCommunity. I would keep your Git history and full authorship credit, clearly identify my distribution as independent, and use a separate Workshop item if it is published there. The original and community distributions would not be enabled together. I am preparing separate artwork and manual installation/update instructions.
+The community source branch is https://github.com/AZOPEIQBKJ/ZombieBuddy/tree/community-42.21. I would keep your Git history and full authorship credit, clearly identify my distribution as independent, and use a separate Workshop item if it is published there. The original and community distributions would not be enabled together. The candidate uses original community artwork and has manual installation/update instructions in French and English.
 
 Are you planning a 42.21 update, and would you prefer these fixes as upstream contributions? Please also let me know of any concerns about the fork's name, credits or a separate Workshop distribution. I am not assuming the project is abandoned, and would be happy to coordinate or contribute useful changes back.
 

@@ -1,6 +1,6 @@
 # Installation de la preview ZombieBuddy Community
 
-Version 2.3.3-community.1, basée sur ZombieBuddy 2.3.3 de Zed. Cible auditée : PZ 42.21.0. Cette candidate a des contrôles locaux ; la réception en partie et sur dédié reste à effectuer. Elle contient le correctif de chargement : aucun JAR de compatibilité Aftermath n'est nécessaire.
+Version 2.3.3-community.2, basée sur ZombieBuddy 2.3.3 de Zed. Cible auditée : PZ 42.21.0. Cette candidate a des contrôles locaux ; la réception en partie et sur dédié reste à effectuer. Elle contient le correctif de chargement : aucun JAR de compatibilité Aftermath n'est nécessaire.
 
 ## Vérifier avant toute copie
 
@@ -18,7 +18,13 @@ S'il existe `ZombieBuddy.jar.new`, interrompre la migration et examiner cette mi
 2. Copier le dossier `Contents/mods/ZombieBuddy` du paquet dans le dossier local de mods sélectionné. Activer une seule distribution portant le Mod ID `ZombieBuddy`. L'original Workshop et le fork ne doivent pas être activés ensemble ; ce choix n'est pas automatisé. Aucune nouvelle page Workshop n'est publiée avec cette preview.
 3. Copier le JAR et sa signature depuis `Contents/mods/ZombieBuddy/libs/` vers le répertoire où l'unique agent les charge. Pour une nouvelle installation utilisant l'agent Java standard, les options Steam sont `-javaagent:ZombieBuddy.jar --`, à combiner avec les options conservées après revue. Le JAR doit se trouver dans le répertoire de travail du lanceur, ou son chemin doit être absolu.
 4. Si l'installation possède déjà **un seul** `-agentlib:zbNative` opérationnel, son remplacement de JAR peut conserver cette entrée, après vérification de l'absence de `.new` et de doublons. Le paquet ne fournit pas de nouvelle DLL. Cette route exige sa propre réception ; les essais JVM seuls ne valident pas l'installation réelle.
-5. Au prochain essai autorisé, relever `ZombieBuddy Community v2.3.3-community.1` et confirmer qu'un mod Java attendu est effectivement chargé. Un affichage de version seul ne suffit pas. Conserver les décisions d'approbation normales ; ne pas utiliser `allow-all` pour contourner un problème de signature.
+5. Au prochain essai autorisé, relever `ZombieBuddy Community v2.3.3-community.2` et confirmer qu'un mod Java attendu est effectivement chargé. Un affichage de version seul ne suffit pas. Conserver les décisions d'approbation normales ; ne pas utiliser `allow-all` pour contourner un problème de signature.
+
+## Langue des approbations Java
+
+Les fenêtres Swing, ImGui et TinyFD ainsi que la console proposent FR/EN. Elles suivent la langue de la JVM, indépendante des options de langue Lua chargées plus tard. Pour imposer le français, ajouter l'argument JVM `-Dzombiebuddy.language=fr` ; pour l'anglais, `-Dzombiebuddy.language=en`. Dans les options Steam de lancement standard, le placer avec l'agent avant le séparateur `--`, en conservant les autres paramètres. Exemple pour une nouvelle installation sans autre agent : `-Dzombiebuddy.language=fr -javaagent:ZombieBuddy.jar --`.
+
+La console française accepte `o`/`oui` et `n`/`non` ; `y` reste compris. Les diagnostics techniques de Java/Steam ne sont pas réécrits. Le changement de langue ne modifie ni signatures, ni approbations, ni choix enregistrés.
 
 ## Serveur dédié Linux
 

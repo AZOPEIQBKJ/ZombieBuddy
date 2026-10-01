@@ -51,11 +51,12 @@ def main():
                 files[mod + source.relative_to(ROOT).as_posix()] = source.read_bytes()
     files[mod + "libs/ZombieBuddy.jar"] = jar.read_bytes()
     files[mod + "libs/ZombieBuddy.jar.zbs"] = signature.read_bytes()
-    for name in ("LICENSE.txt", "README-COMMUNITY.md", "COMMUNITY_CHANGELOG.md", "THIRD_PARTY_NOTICES.md"):
+    for name in ("LICENSE.txt", "README-COMMUNITY.md", "COMMUNITY_CHANGELOG.md", "THIRD_PARTY_NOTICES.md", "SUPPORT.md"):
         files[name] = (ROOT / name).read_bytes()
     for language in ("FR", "EN"):
         files["doc/Installation_" + language + ".md"] = (ROOT / "doc" / ("Installation_" + language + ".md")).read_bytes()
     files["doc/CommunityEvidence.md"] = (ROOT / "doc/CommunityEvidence.md").read_bytes()
+    files["doc/CommunityRelease2Evidence.md"] = (ROOT / "doc/CommunityRelease2Evidence.md").read_bytes()
     for source in sorted((ROOT / "licenses").iterdir()):
         if source.is_file(): files["licenses/" + source.name] = source.read_bytes()
     files["tools/preflight.py"] = (ROOT / "tools/preflight.py").read_bytes()
@@ -66,6 +67,10 @@ def main():
     assert signature_evidence["jarSha256"] == sha(jar.read_bytes())
     assert all(signature_evidence[name] for name in ("validSignature", "tamperedJarRejected", "wrongKeyRejected"))
     files["evidence/signature-check.json"] = (ROOT / "artifacts/signature-check.json").read_bytes()
+    localization = json.loads((ROOT / "artifacts/localization-check.json").read_text())
+    assert localization["jarSha256"] == sha(jar.read_bytes())
+    assert localization["shadedUtf8Catalogue"] and localization["childLocalePropagation"]
+    files["evidence/localization-check.json"] = (ROOT / "artifacts/localization-check.json").read_bytes()
     manifest = dict(distribution="ZombieBuddy Community", version=version, upstream="2.3.3",
         upstreamCommit="0ddf161c27848f12d09e74de7fadbea9d50e621d", sourceCommit=commit,
         targetGameSha256=runtime["gameSha256"], tests=tests, gameplayAccepted=False,

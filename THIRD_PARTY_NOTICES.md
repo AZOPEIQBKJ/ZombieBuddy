@@ -1,6 +1,6 @@
 # Third party notices
 
-ZombieBuddy was created by Andrey "Zed" Zaikin and is distributed under the MIT licence in [LICENSE.txt](LICENSE.txt). The community fork preserves that notice and the upstream Git history. Upstream code and visual resources retain their original attribution; this distribution is independently maintained by Aftermath Systems.
+ZombieBuddy was created by Andrey "Zed" Zaikin and is distributed under the MIT licence in [LICENSE.txt](LICENSE.txt). The community fork preserves that notice and the upstream Git history. Upstream code retains its original attribution. Community.2 replaces the shipped runtime icons with original community artwork and removes unused upstream installation screenshots; the audit is in publishing/ASSETS_AND_LOCALIZATION.md. This distribution is independently maintained by Aftermath Systems.
 
 The Java agent embeds these pinned dependencies. Exact dependency JAR hashes are in [licenses/dependencies.json](licenses/dependencies.json); their licence and notice texts are included in `licenses/` and in the agent under `META-INF/community/licenses/`.
 

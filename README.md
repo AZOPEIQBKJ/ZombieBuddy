@@ -4,7 +4,7 @@ Independent maintenance of [ZombieBuddy by Andrey "Zed" Zaikin](https://github.c
 
 **The PZ 42.21 loading fix is integrated into ZombieBuddy itself. No separate Aftermath compatibility adapter is needed.**
 
-**Current status: local development preview `2.3.3-community.1`.** 148 Java tests and isolated checks against the actual 42.21 game bytecode pass. Real gameplay, save/reload, Host and dedicated-server acceptance remain pending. There is no public community download or Workshop item yet. Linux and macOS support are not established by the Windows checks.
+**Current status: development preview `2.3.3-community.2`.** 160 Java tests and isolated checks against the actual 42.21 game bytecode pass. Real gameplay, save/reload, Host and dedicated-server acceptance remain pending. The binary release is a draft pending acceptance; no community Workshop item is published. Linux and macOS support are not established by the Windows checks.
 
 ## Players / Joueurs
 
@@ -23,7 +23,7 @@ Updates are manual. The original Windows installer is not a community installer.
 ## Developers
 
 - [Build and local verification](README-COMMUNITY.md)
-- [Evidence, baseline and acceptance limits](doc/CommunityEvidence.md)
+- [Current evidence and acceptance limits](doc/CommunityRelease2Evidence.md)
 - [Upstream API guide](doc/ModdingGuide.md) — retain 2.x API compatibility; examples are not a blanket B42.21 guarantee.
 - [Publication materials and release gates](publishing/PLAN_FR.md)
 

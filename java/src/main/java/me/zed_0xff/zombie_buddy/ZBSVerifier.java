@@ -3,6 +3,7 @@ package me.zed_0xff.zombie_buddy;
 import static me.zed_0xff.zombie_buddy.SteamWorkshop.SteamID64;
 import static me.zed_0xff.zombie_buddy.SteamWorkshop.WorkshopItemID;
 import static me.zed_0xff.zombie_buddy.ModFlags.*;
+import static me.zed_0xff.zombie_buddy.i18n.Messages.text;
 
 import org.bouncycastle.crypto.params.Ed25519PublicKeyParameters;
 import org.bouncycastle.crypto.signers.Ed25519Signer;
@@ -63,7 +64,7 @@ public final class ZBSVerifier {
         }
 
         static CheckResult missingNotAllowed(SteamID64 uploaderID) {
-            return new CheckResult(ModFlags.EMPTY, null, uploaderID, "Missing .zbs file (allow_unsigned_mods=false)",
+            return new CheckResult(ModFlags.EMPTY, null, uploaderID, text("signature.missing.policy"),
                 "missing .zbs file; allow_unsigned_mods=false", null);
         }
     }
@@ -125,8 +126,11 @@ public final class ZBSVerifier {
      */
     public static String noticeForUi(Verification zbs) {
         if (zbs == null) return "";
-        String shortMsg = zbs.shortMessage != null ? zbs.shortMessage.trim() : "";
-        String detail = zbs.detailedMessage != null ? zbs.detailedMessage.trim() : "";
+        String shortMsg = zbs instanceof MissingSignature ? text("signature.missing")
+            : zbs instanceof InvalidSignature ? text("signature.invalid")
+            : zbs instanceof VerificationError ? text("signature.unverified") : zbs.shortMessage.trim();
+        String detail = zbs.uiDetailKey == null ? zbs.detailedMessage.trim()
+            : text(zbs.uiDetailKey, zbs.uiDetailArgs);
         if (shortMsg.isEmpty()) return detail;
         if (detail.isEmpty() || shortMsg.equals(detail)) return shortMsg;
         return shortMsg + "\n" + detail;
@@ -160,7 +164,8 @@ public final class ZBSVerifier {
         Map<SteamID64, KnownAuthors.AuthorEntry> knownAuthors
     ) {
         if (zbsPath == null || !Files.isRegularFile(zbsPath)) {
-            return new MissingSignature(null, "Missing .zbs file next to JAR: " + zbsPath);
+            return new MissingSignature(null, "Missing .zbs file next to JAR: " + zbsPath)
+                .ui("signature.missing.path", zbsPath);
         }
         SteamID64 sid;
         byte[] sig;
@@ -169,11 +174,13 @@ public final class ZBSVerifier {
             sid = p.sid;
             sig = p.signature;
         } catch (IOException e) {
-            return new InvalidSignature(null, "Could not read .zbs: " + e.getMessage());
+            return new InvalidSignature(null, "Could not read .zbs: " + e.getMessage())
+                .ui("signature.unreadable", e.getMessage());
         }
         if (uploaderID != null) {
             if (!uploaderID.equals(sid)) {
-                return new InvalidSignature(sid, "Declared SteamID64 does not match Workshop item uploader.");
+                return new InvalidSignature(sid, "Declared SteamID64 does not match Workshop item uploader.")
+                    .ui("signature.uploader");
             }
         }
         List<String> pubHexes = knownJavaModZBSHexes(sid, knownAuthors);
@@ -183,14 +190,15 @@ public final class ZBSVerifier {
             try {
                 pubHexes = fetchJavaModZBSHexesFromSteam(sid);
             } catch (Exception e) {
-                return new VerificationError(sid, e.getMessage(), Collections.emptyList());
+                return new VerificationError(sid, e.getMessage(), Collections.emptyList())
+                    .ui("signature.error", e.getMessage());
             }
             if (pubHexes.isEmpty()) {
                 return new VerificationError(
                     sid,
                     "Could not find JavaModZBS:<64 hex> on Steam profile — add it to your profile summary.",
                     pubHexes
-                );
+                ).ui("signature.key.missing");
             }
         }
         try {
@@ -201,10 +209,12 @@ public final class ZBSVerifier {
                 try {
                     pubRaw = hexToBytes(pubHex);
                 } catch (Exception e) {
-                    return new VerificationError(sid, "Invalid JavaModZBS hex in " + keySource + ".", pubHexes);
+                    return new VerificationError(sid, "Invalid JavaModZBS hex in " + keySource + ".", pubHexes)
+                        .ui("signature.key.hex", text(keySource.equals("Steam profile") ? "signature.source.steam" : "signature.source.registry"));
                 }
                 if (pubRaw.length != 32) {
-                    return new VerificationError(sid, "JavaModZBS in " + keySource + " must be 64 hex chars (32-byte Ed25519 public key).", pubHexes);
+                    return new VerificationError(sid, "JavaModZBS in " + keySource + " must be 64 hex chars (32-byte Ed25519 public key).", pubHexes)
+                        .ui("signature.key.length", text(keySource.equals("Steam profile") ? "signature.source.steam" : "signature.source.registry"));
                 }
                 Ed25519PublicKeyParameters pub = new Ed25519PublicKeyParameters(pubRaw, 0);
                 Ed25519Signer signer = new Ed25519Signer();
@@ -215,9 +225,10 @@ public final class ZBSVerifier {
                     return new ValidSignature(sid, pubHexes);
                 }
             }
-            return new InvalidSignature(sid, "Invalid signature — JAR may have been tampered with.", pubHexes);
+            return new InvalidSignature(sid, "Invalid signature — JAR may have been tampered with.", pubHexes)
+                .ui("signature.tampered");
         } catch (Exception e) {
-            return new VerificationError(sid, e.getMessage(), pubHexes);
+            return new VerificationError(sid, e.getMessage(), pubHexes).ui("signature.error", e.getMessage());
         }
     }
 
@@ -343,6 +354,15 @@ public final class ZBSVerifier {
         public final String detailedMessage;
         /** JavaModZBS keys used for verification (lowercase hex). */
         public final List<String> profileKeys;
+        // Presentation only: raw diagnostic/API fields above remain unchanged.
+        private String uiDetailKey;
+        private Object[] uiDetailArgs;
+
+        final Verification ui(String key, Object... args) {
+            uiDetailKey = key;
+            uiDetailArgs = args.clone();
+            return this;
+        }
 
         protected Verification(SteamID64 sid, String shortMessage, String detailedMessage) {
             this(sid, shortMessage, detailedMessage, Collections.emptyList());

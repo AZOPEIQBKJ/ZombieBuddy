@@ -7,6 +7,7 @@ import java.util.Locale;
 import me.zed_0xff.zombie_buddy.JarBatchApprovalProtocol;
 import me.zed_0xff.zombie_buddy.Logger;
 import me.zed_0xff.zombie_buddy.Utils;
+import me.zed_0xff.zombie_buddy.i18n.Messages;
 
 /**
  * Runs a subprocess executing {@link SwingApprovalMain} (javax.swing). If the subprocess fails,
@@ -47,6 +48,7 @@ public final class SwingModApprovalFrontend implements ModApprovalFrontend {
             ProcessBuilder pb = new ProcessBuilder(
                 javaExe,
                 "-Djava.awt.headless=false",
+                Messages.childJvmArgument(),
                 "-cp",
                 jarPath,
                 SwingApprovalMain.class.getName(),

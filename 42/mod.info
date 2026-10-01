@@ -3,7 +3,7 @@ id=ZombieBuddy
 author=Zed; community maintenance by Aftermath Systems
 poster=icon_256.png
 icon=icon_128.png
-description=Community maintenance preview for PZ 42.21, based on ZombieBuddy by Zed. / Version communautaire de maintenance pour PZ 42.21, basee sur ZombieBuddy de Zed.
+description=Community maintenance preview 2.3.3-community.2 for PZ 42.21, based on ZombieBuddy by Zed. / Preview communautaire 2.3.3-community.2 pour PZ 42.21, basée sur ZombieBuddy de Zed.
 
 javaJarFile=../libs/ZombieBuddy.jar
 javaPkgName=me.zed_0xff.zombie_buddy

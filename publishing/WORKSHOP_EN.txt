@@ -4,7 +4,7 @@ Independent maintenance of ZombieBuddy by Andrey "Zed" Zaikin, based on version 
 [b]PZ 42.21 loading fixes are integrated into the framework. No separate Aftermath compatibility adapter is required.[/b]
 
 [h2]Current status[/h2]
-Local development candidate 2.3.3-community.1: 148 Java tests and isolated checks against actual PZ 42.21 bytecode pass. Real gameplay, save/reload, Host, dedicated servers, Linux and macOS remain unaccepted. These checks do not establish multiplayer support or compatibility with every Java mod. This draft is not a stable release announcement.
+Development candidate 2.3.3-community.2: 160 Java tests and isolated checks against actual PZ 42.21 bytecode pass. Real gameplay, save/reload, Host, dedicated servers, Linux and macOS remain unaccepted. These checks do not establish multiplayer support or compatibility with every Java mod. This draft is not a stable release announcement.
 
 [h2]Installation and migration[/h2]
 Subscribing alone does not install the Java agent. Read the community installation guide before changing launch settings. Retain one active distribution with Mod ID [b]ZombieBuddy[/b] and one effective ZombieBuddy agent across the launcher JSON and Steam/service/script options. Keep unrelated launch options and back up the previous files/settings.
@@ -12,10 +12,9 @@ The 42.21 fix needs neither AftermathLHCompat4221.jar nor a patches_jar option. 
 Updates are manual. The original Windows installer belongs to the original distribution; this preview supplies no installer or native DLL. Mod-signature and approval checks remain active. Java mods execute with the permissions of the game process; use trusted sources.
 
 [h2]Downloads, help and rollback[/h2]
-Planned community repository and installation guides: https://github.com/AZOPEIQBKJ/ZombieBuddyCommunity
-Planned community releases: https://github.com/AZOPEIQBKJ/ZombieBuddyCommunity/releases
-Planned community issue reports: https://github.com/AZOPEIQBKJ/ZombieBuddyCommunity/issues
-These destinations must be created and verified before this draft is published.
+Community repository and installation guides: https://github.com/AZOPEIQBKJ/ZombieBuddy
+Community releases: https://github.com/AZOPEIQBKJ/ZombieBuddy/releases
+Community issue reports: https://github.com/AZOPEIQBKJ/ZombieBuddy/issues
 Include exact versions, operating system, launch route and a relevant redacted log excerpt. Never post private keys, credentials or the game JAR. Stop the game/server before updates or rollback; restore the previous JAR, mod copy and launch settings together.
 
 [h2]Credits[/h2]

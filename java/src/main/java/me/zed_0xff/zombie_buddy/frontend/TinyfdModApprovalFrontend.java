@@ -1,5 +1,7 @@
 package me.zed_0xff.zombie_buddy.frontend;
 
+import static me.zed_0xff.zombie_buddy.i18n.Messages.text;
+
 import me.zed_0xff.zombie_buddy.*;
 
 import zombie.core.Core;
@@ -16,7 +18,6 @@ import java.util.Locale;
  */
 public final class TinyfdModApprovalFrontend implements ModApprovalFrontend {
 
-    private static final String DIALOG_TITLE = "ZombieBuddy Java mod approval";
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     @Override
@@ -37,12 +38,8 @@ public final class TinyfdModApprovalFrontend implements ModApprovalFrontend {
         if (e.zbs.invalid()) {
             String note = !Utils.isBlank(e.zbs.notice())
                 ? e.zbs.notice()
-                : "Invalid ZBS — load will be denied.";
-            tinyfdYesNo(
-                "ZBS invalid — this Java mod cannot be loaded.\n\n"
-                    + note
-                    + "\n\nIt will be denied."
-            );
+                : text("console.denied");
+            tinyfdYesNo(text("tiny.invalid", note));
             return false;
         }
 
@@ -50,19 +47,9 @@ public final class TinyfdModApprovalFrontend implements ModApprovalFrontend {
         String zbsLine = "";
         if (e.zbs.valid() || e.zbs.invalid() || e.zbs.unsigned()) {
             String sid = e.zbs.authorSteamId() != null ? e.zbs.authorSteamId().toString() : "";
-            zbsLine = "ZBS: " + zbsStatus(e)
-                + (!sid.isEmpty() ? " (Steam: " + sid + ")" : "")
-                + "\n\n";
+            zbsLine = text("tiny.zbs", zbsStatus(e), !sid.isEmpty() ? text("tiny.steam", sid) : "");
         }
-        Boolean allow = tinyfdYesNo(
-            "Allow Java mod to load?\n\n"
-                + zbsLine
-                + "Mod: " + e.modId + "\n\n"
-                + "JAR: " + e.jarAbsolutePath + "\n\n"
-                + "Modified: " + modified + "\n\n"
-                + "SHA-256: " + e.sha256 + "\n\n"
-                + "Only allow if you trust this mod source."
-        );
+        Boolean allow = tinyfdYesNo(text("tiny.allow", zbsLine, e.modId, e.jarAbsolutePath, modified, e.sha256));
         if (allow == null) {
             return false;
         }
@@ -71,17 +58,17 @@ public final class TinyfdModApprovalFrontend implements ModApprovalFrontend {
 
     private static String zbsStatus(JarBatchApprovalProtocol.Entry e) {
         if (e.zbs.valid()) {
-            return "valid";
+            return text("tiny.valid");
         }
         if (e.zbs.invalid()) {
-            return "invalid";
+            return text("tiny.invalid.status");
         }
-        return "unsigned";
+        return text("tiny.unsigned");
     }
 
     private static String formatDate(Date date) {
         if (date == null) {
-            return "<unknown>";
+            return text("status.unknown");
         }
         return new SimpleDateFormat(DATE_FORMAT, Locale.ROOT).format(date);
     }
@@ -103,7 +90,7 @@ public final class TinyfdModApprovalFrontend implements ModApprovalFrontend {
             Object result = Accessor.callByName(
                 dialogClass,
                 "tinyfd_messageBox",
-                DIALOG_TITLE,
+                text("approval.title"),
                 msg,
                 "yesno",
                 "warning",

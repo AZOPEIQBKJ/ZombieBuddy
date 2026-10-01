@@ -1,5 +1,7 @@
 # Community fork evidence
 
+Historical baseline and community.1 evidence follow. For the current community.2 candidate, see [release preparation and verification](CommunityRelease2Evidence.md); community.1's archive and hashes remain unchanged.
+
 User approval: 2026-10-01. Scope: integrate compatibility fixes in ZombieBuddy itself; no Aftermath compatibility agent. Local branch: `codex/community-42.21`, based on upstream `v2.3.3` / `0ddf161c27848f12d09e74de7fadbea9d50e621d`. Retain upstream packages and the `ZombieBuddy` Mod ID for binary compatibility. This preview is a distinct distribution, not an official Zed release.
 
 ## Verified contracts before implementation

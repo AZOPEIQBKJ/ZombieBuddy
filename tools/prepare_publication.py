@@ -68,7 +68,7 @@ def main():
             target.write_bytes(data)
     # Workshop uploads Contents, so include notices with the Lua and Java payload.
     for name, data in payload.items():
-        if name in ("LICENSE.txt", "THIRD_PARTY_NOTICES.md", "doc/CommunityEvidence.md") or name.startswith("licenses/"):
+        if name in ("LICENSE.txt", "THIRD_PARTY_NOTICES.md", "README-COMMUNITY.md", "COMMUNITY_CHANGELOG.md", "SUPPORT.md") or name.startswith(("licenses/", "doc/")):
             target = mod / name
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(data)
@@ -105,14 +105,14 @@ def main():
         candidateZipSha256=config["candidateZipSha256"],
         candidateJarSha256=config["candidateJarSha256"],
         workshopVisibility="private", workshopItemId=None,
-        retainsFrozenRuntimeAssets=True, originalArtworkAddedOnlyAsWorkshopCover=True,
+        retainsFrozenRuntimeAssets=True, originalCommunityArtworkInRuntime=True,
         outstanding=config["outstanding"])
     (output / "PREPARATION_STATUS.json").write_text(json.dumps(status, indent=2) + "\n", encoding="utf-8")
     (output / "READ_ME_FIRST.txt").write_text(
         "LOCAL PREPARATION ONLY / PREPARATIFS LOCAUX\n"
         "Not ready for public release. No upload, install or game launch was performed.\n"
-        "workshop-draft uses the frozen community.1 runtime, including its old graphics.\n"
-        "New artwork is in materials/publishing/assets, not inserted into that signed JAR.\n"
+        "workshop-draft uses the frozen community.2 runtime with original icons and FR/EN catalogues.\n"
+        "The GitHub source branch and draft release are tracked separately from Workshop upload.\n"
         "Read materials/publishing/PLAN_FR.md and PREPARATION_STATUS.json before further work.\n"
         "materials is a documentation/tool kit, not a complete buildable source checkout.\n"
         "Do not upload this entire preparation directory or use the original Workshop ID.\n",
