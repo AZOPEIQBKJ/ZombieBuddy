@@ -1,5 +1,5 @@
-Publication copy is maintained in publishing/WORKSHOP_EN.txt and publishing/WORKSHOP_FR.txt.
+Publication copy is maintained in publishing/WORKSHOP_EN.txt.
 These are drafts; no community Workshop item has been published.
 Use tools/prepare_publication.py to prepare a local private draft from the frozen candidate.
 Do not upload this source checkout or use the inherited upstream release/installer tasks.
-See publishing/PLAN_FR.md for the release sequence and outstanding acceptance gates.
+See publishing/PLAN.md for the release sequence and outstanding acceptance gates.

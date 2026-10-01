@@ -2,7 +2,6 @@ package me.zed_0xff.zombie_buddy.frontend;
 
 import static me.zed_0xff.zombie_buddy.ModFlags.MF_PERSIST;
 import static me.zed_0xff.zombie_buddy.i18n.Messages.text;
-import me.zed_0xff.zombie_buddy.i18n.Messages;
 
 import me.zed_0xff.zombie_buddy.*;
 
@@ -88,7 +87,7 @@ public final class ConsoleModApprovalFrontend implements ModApprovalFrontend {
             if (s.isEmpty()) {
                 continue;
             }
-            if (s.startsWith("y") || (Messages.language().equals("fr") && s.startsWith("o"))) {
+            if (s.startsWith("y")) {
                 return true;
             }
             if (s.startsWith("n")) {

@@ -74,8 +74,7 @@ def main():
             target.write_bytes(data)
     (draft / "preview.png").write_bytes(png)
     en = (ROOT / "publishing/WORKSHOP_EN.txt").read_text(encoding="utf-8")
-    fr = (ROOT / "publishing/WORKSHOP_FR.txt").read_text(encoding="utf-8")
-    description = en + "\n\n" + fr
+    description = en
     # Format verified from PZ 42.21 Workshop/ModTemplate/workshop.txt and its reader.
     metadata = ["version=1", "title=ZombieBuddy Community — development preview"]
     metadata.extend("description=" + line for line in description.splitlines())
@@ -109,11 +108,11 @@ def main():
         outstanding=config["outstanding"])
     (output / "PREPARATION_STATUS.json").write_text(json.dumps(status, indent=2) + "\n", encoding="utf-8")
     (output / "READ_ME_FIRST.txt").write_text(
-        "LOCAL PREPARATION ONLY / PREPARATIFS LOCAUX\n"
+        "LOCAL WORKSHOP PREPARATION\n"
         "Not ready for public release. No upload, install or game launch was performed.\n"
-        "workshop-draft uses the frozen community.2 runtime with original icons and FR/EN catalogues.\n"
+        "workshop-draft uses the frozen community.3 runtime with original icons and English-only text.\n"
         "The GitHub source branch and draft release are tracked separately from Workshop upload.\n"
-        "Read materials/publishing/PLAN_FR.md and PREPARATION_STATUS.json before further work.\n"
+        "Read materials/publishing/PLAN.md and PREPARATION_STATUS.json before further work.\n"
         "materials is a documentation/tool kit, not a complete buildable source checkout.\n"
         "Do not upload this entire preparation directory or use the original Workshop ID.\n",
         encoding="utf-8")

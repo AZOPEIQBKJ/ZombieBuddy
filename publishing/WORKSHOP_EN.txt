@@ -4,7 +4,7 @@ Independent maintenance of ZombieBuddy by Andrey "Zed" Zaikin, based on version 
 [b]PZ 42.21 loading fixes are integrated into the framework. No separate Aftermath compatibility adapter is required.[/b]
 
 [h2]Current status[/h2]
-Development candidate 2.3.3-community.2: 160 Java tests and isolated checks against actual PZ 42.21 bytecode pass. Real gameplay, save/reload, Host, dedicated servers, Linux and macOS remain unaccepted. These checks do not establish multiplayer support or compatibility with every Java mod. This draft is not a stable release announcement.
+Development candidate 2.3.3-community.3: 158 Java tests and isolated checks against actual PZ 42.21 bytecode pass. Real gameplay, save/reload, Host, dedicated servers, Linux and macOS remain unaccepted. These checks do not establish multiplayer support or compatibility with every Java mod. This draft is not a stable release announcement.
 
 [h2]Installation and migration[/h2]
 Subscribing alone does not install the Java agent. Read the community installation guide before changing launch settings. Retain one active distribution with Mod ID [b]ZombieBuddy[/b] and one effective ZombieBuddy agent across the launcher JSON and Steam/service/script options. Keep unrelated launch options and back up the previous files/settings.

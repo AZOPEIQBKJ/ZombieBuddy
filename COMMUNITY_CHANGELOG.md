@@ -1,5 +1,13 @@
 # Community changes
 
+## 2.3.3-community.3
+
+- Make the distribution English-only as requested by the maintainer. Remove French Java/Lua catalogues and bilingual publication text. English approval text remains structured and available before game initialization.
+- Remove locale switching and child-JVM language propagation; an old `zombiebuddy.language` property has no effect. Console approval retains the original `y/n` contract.
+- Keep the integrated 42.21 fixes, original community artwork, manual updates and signature/approval policy.
+- Rebuild, independently verify and sign a new candidate. Earlier local archives remain immutable; their unpublished draft is superseded.
+- See [community.3 evidence](doc/CommunityRelease3Evidence.md) for local results and pending gameplay acceptance.
+
 ## 2.3.3-community.2
 
 - Replace all distributed upstream icons with original community artwork. Remove unused installation screenshots and original graphics source files from the branch tip.
@@ -8,7 +16,6 @@
 - Preserve all community.1 loading fixes and manual updates. New signed candidate, distinct version and hashes; community.1 remains immutable.
 - Local Java suite: 115 unit + 30 patched + 15 vanilla = 160 passing tests. Real game-loop/Host/dedicated acceptance remains pending. See [community.2 evidence](doc/CommunityRelease2Evidence.md).
 
-Les interfaces d'approbation Java partagent désormais des textes FR/EN structurés, les icônes sont propres au fork et les anciennes captures inutilisées sont retirées. La langue suit la JVM, avec surcharge explicite `-Dzombiebuddy.language=fr` ou `en` ; elle ne suit pas automatiquement un changement ultérieur dans les options du jeu. Les détails techniques fournis par Java/Steam restent dans leur langue d'origine. Les règles de confiance et les approbations ne sont pas assouplies.
 
 ## 2.3.3-community.1
 
@@ -21,6 +28,4 @@ Les interfaces d'approbation Java partagent désormais des textes FR/EN structur
 - Preserve user Steam options in the upstream installer source, including quoted paths. Reject ambiguous wrappers rather than overwrite them. That installer is not part of this preview package.
 - Add the Gradle wrapper, remove the author's keychain defaults, make archives reproducible and retain dependency licences and notices inside the JAR.
 
-The code is based on upstream commit `0ddf161c27848f12d09e74de7fadbea9d50e621d`. Existing mods still require their own 42.21 engine compatibility. No game, Host, Linux dedicated-server or real multiplayer acceptance is claimed. The original Java approval dialogs retain their upstream English text; a complete FR/EN interface audit and independent public branding remain prerequisites for public distribution. Workshop publication and subscriptions are unchanged.
-
-Cette preview intègre les corrections dans ZombieBuddy. La validation locale ne remplace pas les essais en partie et sur serveur. Les dialogues Java hérités restent en anglais ; leur traduction complète et la revue de publication restent à traiter avant diffusion publique.
+The code is based on upstream commit `0ddf161c27848f12d09e74de7fadbea9d50e621d`. Existing mods still require their own 42.21 engine compatibility. No game, Host, Linux dedicated-server or real multiplayer acceptance is claimed. The original Java approval dialogs retain their upstream English text; later candidates supersede its publication preparation and language decisions. Workshop publication and subscriptions are unchanged.

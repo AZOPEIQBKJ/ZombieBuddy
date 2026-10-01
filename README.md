@@ -4,17 +4,15 @@ Independent maintenance of [ZombieBuddy by Andrey "Zed" Zaikin](https://github.c
 
 **The PZ 42.21 loading fix is integrated into ZombieBuddy itself. No separate Aftermath compatibility adapter is needed.**
 
-**Current status: development preview `2.3.3-community.2`.** 160 Java tests and isolated checks against the actual 42.21 game bytecode pass. Real gameplay, save/reload, Host and dedicated-server acceptance remain pending. The binary release is a draft pending acceptance; no community Workshop item is published. Linux and macOS support are not established by the Windows checks.
+**Current status: development preview `2.3.3-community.3`.** 158 Java tests and isolated checks against the actual 42.21 game bytecode pass. Real gameplay, save/reload, Host and dedicated-server acceptance remain pending. The binary release is a draft pending acceptance; no community Workshop item is published. Linux and macOS support are not established by the Windows checks.
 
-## Players / Joueurs
+## Players
 
-| English | Français |
-| --- | --- |
-| [Installation, migration and rollback](doc/Installation_EN.md) | [Installation, migration et retour arrière](doc/Installation_FR.md) |
-| [Changes and current limits](COMMUNITY_CHANGELOG.md) | [Préparatifs de publication](publishing/PLAN_FR.md) |
-| [Support and bug reports](SUPPORT.md) | [Support et signalement des bugs](SUPPORT.md) |
+- [Installation, migration and rollback](doc/Installation_EN.md)
+- [Changes and current limits](COMMUNITY_CHANGELOG.md)
+- [Support and bug reports](SUPPORT.md)
 
-Ce fork vise à maintenir le chargement des mods Java sous PZ 42.21. Le correctif est intégré au framework. La candidate locale est vérifiée au banc ; elle n'est pas encore réceptionnée en partie ou en multijoueur.
+The community distribution uses English throughout its interface, documentation and publication materials.
 
 Keep **one** active distribution with Mod ID `ZombieBuddy`, and **one** effective ZombieBuddy agent across all launch settings. Existing 2.x namespaces and the Mod ID are preserved for compatibility. A mod that hard-codes the original Workshop item may still need a dependency update by its maintainer. Installing the framework does not automatically port every dependent mod to 42.21.
 
@@ -23,9 +21,9 @@ Updates are manual. The original Windows installer is not a community installer.
 ## Developers
 
 - [Build and local verification](README-COMMUNITY.md)
-- [Current evidence and acceptance limits](doc/CommunityRelease2Evidence.md)
+- [Current evidence and acceptance limits](doc/CommunityRelease3Evidence.md)
 - [Upstream API guide](doc/ModdingGuide.md) — retain 2.x API compatibility; examples are not a blanket B42.21 guarantee.
-- [Publication materials and release gates](publishing/PLAN_FR.md)
+- [Publication materials and release gates](publishing/PLAN.md)
 
 Build with JDK 25 and the pinned Gradle wrapper, using your legally installed game as a compile/test input. Never include the game JAR or private signing keys in a public repository or release. Legacy Rake/installer workflows retain upstream assumptions; use the community build and packaging instructions.
 

@@ -3,6 +3,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -94,11 +95,11 @@ def main():
         shutil.copyfile(game / "stdlib.lua", work / "stdlib.lua")
         lua = (ROOT / "42/media/lua/client/ZombieBuddy_Options.lua").read_text(encoding="utf-8")
         notification = (ROOT / "42/media/lua/client/ZombieBuddy.lua").read_text(encoding="utf-8")
-        translations = {}
-        for language in ("EN", "FR"):
-            path = ROOT / "common/media/lua/shared/Translate" / language
-            translations[language] = json.loads((path / "UI.json").read_text(encoding="utf-8"))
-        assert translations["EN"].keys() == translations["FR"].keys()
+        translation_root = ROOT / "common/media/lua/shared/Translate"
+        english = json.loads((translation_root / "EN/UI.json").read_text(encoding="utf-8"))
+        required_keys = set(re.findall(r'getText\("([^"]+)"', lua + notification))
+        assert required_keys <= english.keys(), "Missing English UI key"
+        assert not any((translation_root / "FR").glob("*")), "French resources must not be shipped"
         fixture = '''
 local applied, event = nil, nil
 local option = { getValue = function() return 0.4 end }

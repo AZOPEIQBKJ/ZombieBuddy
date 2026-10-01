@@ -1,6 +1,6 @@
 # Installing the ZombieBuddy Community preview
 
-Version 2.3.3-community.2 is based on Zed's ZombieBuddy 2.3.3. The audited target is PZ 42.21.0. Local checks do not establish gameplay or dedicated-server acceptance. The loading fix is integrated; no Aftermath compatibility JAR is required.
+Version 2.3.3-community.3 is based on Zed's ZombieBuddy 2.3.3. The audited target is PZ 42.21.0. Local checks do not establish gameplay or dedicated-server acceptance. The loading fix is integrated; no Aftermath compatibility JAR is required.
 
 ## Preflight
 
@@ -20,11 +20,9 @@ Stop if `ZombieBuddy.jar.new` exists: the old native loader can replace the JAR 
 4. An installation already using one working `-agentlib:zbNative` can retain that entry while replacing its JAR, once duplicates and pending `.new` updates are ruled out. This package does not supply a new native DLL. That route still needs acceptance in the actual installation.
 5. At the next authorized game test, verify the community version and an actually loaded Java mod. A version watermark alone is not sufficient. Keep normal approval/signature checks; do not bypass a signature problem with `allow-all`.
 
-## Approval language
+## Interface language
 
-The approval dialogs use the JVM language (French for `fr`, English otherwise). To force French or English, add `-Dzombiebuddy.language=fr` or `-Dzombiebuddy.language=en` to the same reviewed JVM launch route. This setting is passed to the Swing subprocess. It does not track a language change made later inside the game.
-
-For a new Steam Java-agent route, the combined options can be `-javaagent:ZombieBuddy.jar -Dzombiebuddy.language=fr --`; first review existing JSON/Steam settings to avoid duplicate agents. Technical exception details supplied by Java or Steam remain in their original language.
+The community interface and documentation are English-only. No `zombiebuddy.language` option is required; an option retained from the unpublished community.2 candidate has no effect. Native OS controls and external technical diagnostics may use their own system language.
 
 ## Linux dedicated server
 

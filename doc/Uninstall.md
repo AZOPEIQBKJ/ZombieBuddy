@@ -1,6 +1,6 @@
 # Uninstalling ZombieBuddy
 
-> Historical upstream instructions. For ZombieBuddy Community, follow the rollback section of the [English](Installation_EN.md) or [French](Installation_FR.md) community guide and preserve unrelated launch options.
+> Historical upstream instructions. For ZombieBuddy Community, follow the rollback section of the [community guide](Installation_EN.md) and preserve unrelated launch options.
 
 ## Windows
 

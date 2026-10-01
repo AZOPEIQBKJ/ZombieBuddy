@@ -6,28 +6,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.Properties;
 
-/** Approval UI text available before PZ initializes and in standalone child JVMs. */
+/** English approval text available before PZ initializes and in standalone child JVMs. */
 public final class Messages {
-    public static final String LANGUAGE_PROPERTY = "zombiebuddy.language";
     private static final Properties EN = load("en");
-    private static final Properties FR = load("fr");
 
     private Messages() {}
 
-    public static String language() {
-        String selected = System.getProperty(LANGUAGE_PROPERTY);
-        if (selected == null || selected.isBlank()) selected = Locale.getDefault().getLanguage();
-        selected = selected.trim().toLowerCase(Locale.ROOT).replace('_', '-');
-        return selected.equals("fr") || selected.startsWith("fr-") ? "fr" : "en";
-    }
-
-    public static String childJvmArgument() {
-        return "-D" + LANGUAGE_PROPERTY + "=" + language();
-    }
-
     public static String text(String key, Object... args) {
-        Properties selected = language().equals("fr") ? FR : EN;
-        String template = selected.getProperty(key, EN.getProperty(key, "[" + key + "]"));
+        String template = EN.getProperty(key, "[" + key + "]");
         return args.length == 0 ? template : String.format(Locale.ROOT, template, args);
     }
 

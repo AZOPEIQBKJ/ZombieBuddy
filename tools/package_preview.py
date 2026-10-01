@@ -53,10 +53,10 @@ def main():
     files[mod + "libs/ZombieBuddy.jar.zbs"] = signature.read_bytes()
     for name in ("LICENSE.txt", "README-COMMUNITY.md", "COMMUNITY_CHANGELOG.md", "THIRD_PARTY_NOTICES.md", "SUPPORT.md"):
         files[name] = (ROOT / name).read_bytes()
-    for language in ("FR", "EN"):
+    for language in ("EN",):
         files["doc/Installation_" + language + ".md"] = (ROOT / "doc" / ("Installation_" + language + ".md")).read_bytes()
     files["doc/CommunityEvidence.md"] = (ROOT / "doc/CommunityEvidence.md").read_bytes()
-    files["doc/CommunityRelease2Evidence.md"] = (ROOT / "doc/CommunityRelease2Evidence.md").read_bytes()
+    files["doc/CommunityRelease3Evidence.md"] = (ROOT / "doc/CommunityRelease3Evidence.md").read_bytes()
     for source in sorted((ROOT / "licenses").iterdir()):
         if source.is_file(): files["licenses/" + source.name] = source.read_bytes()
     files["tools/preflight.py"] = (ROOT / "tools/preflight.py").read_bytes()
@@ -69,7 +69,7 @@ def main():
     files["evidence/signature-check.json"] = (ROOT / "artifacts/signature-check.json").read_bytes()
     localization = json.loads((ROOT / "artifacts/localization-check.json").read_text())
     assert localization["jarSha256"] == sha(jar.read_bytes())
-    assert localization["shadedUtf8Catalogue"] and localization["childLocalePropagation"]
+    assert localization["englishOnlyCatalogue"] and localization["nonEnglishLocaleChecked"]
     files["evidence/localization-check.json"] = (ROOT / "artifacts/localization-check.json").read_bytes()
     manifest = dict(distribution="ZombieBuddy Community", version=version, upstream="2.3.3",
         upstreamCommit="0ddf161c27848f12d09e74de7fadbea9d50e621d", sourceCommit=commit,

@@ -10,54 +10,46 @@ import java.nio.file.Path;
 import java.util.List;
 import me.zed_0xff.zombie_buddy.JarBatchApprovalProtocol.Entry;
 import me.zed_0xff.zombie_buddy.ModFlags;
-import me.zed_0xff.zombie_buddy.i18n.Messages;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
-class ConsoleLocalizationTest {
-    private final String previous = System.getProperty(Messages.LANGUAGE_PROPERTY);
-    @AfterEach void restore() {
-        if (previous == null) System.clearProperty(Messages.LANGUAGE_PROPERTY);
-        else System.setProperty(Messages.LANGUAGE_PROPERTY, previous);
-    }
+class ConsoleApprovalTest {
 
-    @Test void frenchOuiPersistsOnlyWhenExplicitlyChosen() {
+    @Test void yesPersistsOnlyWhenExplicitlyChosen() {
         var entry = entry(Entry.ZBSignature.none());
-        String output = run("fr", "oui\noui\n", entry);
+        String output = run("yes\nyes\n", entry);
         assertTrue(entry.decision);
         assertTrue(entry.flags.has(MF_PERSIST));
-        assertTrue(output.contains("Autoriser le chargement"));
-        assertTrue(output.contains("[o/n]"));
+        assertTrue(output.contains("Allow this Java mod"));
+        assertTrue(output.contains("[y/n]"));
     }
 
-    @Test void frenchNonAndEofNeverGrantApproval() {
+    @Test void noAndEofNeverGrantApproval() {
         var denied = entry(Entry.ZBSignature.none());
-        run("fr", "non\nnon\n", denied);
+        run("no\nno\n", denied);
         assertFalse(denied.decision);
         var eof = entry(Entry.ZBSignature.none());
-        run("fr", "", eof);
+        run("", eof);
         assertFalse(eof.decision);
         assertFalse(eof.flags.has(MF_PERSIST));
     }
 
-    @Test void invalidSignatureCannotBeApprovedWithOui() {
-        var invalid = entry(new Entry.ZBSignature(false, null, "Signature invalide."));
-        String output = run("fr", "oui\n", invalid);
+    @Test void invalidSignatureCannotBeApprovedWithYes() {
+        var invalid = entry(new Entry.ZBSignature(false, null, "Invalid signature."));
+        String output = run("yes\n", invalid);
         assertFalse(invalid.decision);
-        assertFalse(output.contains("Autoriser le chargement"));
-        assertTrue(output.contains("chargement est refusé"));
+        assertFalse(output.contains("Allow this Java mod"));
+        assertTrue(output.contains("loading is denied"));
     }
 
     @Test void englishYesAndRetryKeepExistingAnswerContract() {
         var entry = entry(Entry.ZBSignature.none());
-        String output = run("en", "o\nyes\nno\n", entry);
+        String output = run("o\nyes\nno\n", entry);
         assertTrue(entry.decision);
         assertFalse(entry.flags.has(MF_PERSIST));
         assertTrue(output.contains("Please answer y or n."));
     }
 
-    private String run(String language, String input, Entry entry) {
-        System.setProperty(Messages.LANGUAGE_PROPERTY, language);
+    private String run(String input, Entry entry) {
         var bytes = new ByteArrayOutputStream();
         var frontend = new ConsoleModApprovalFrontend(new StringReader(input), new PrintStream(bytes, true, StandardCharsets.UTF_8));
         frontend.approvePendingMods(List.of(entry));

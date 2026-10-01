@@ -361,8 +361,6 @@ dependencies {
 
 // Configure all test tasks to always run and output test results
 tasks.withType(Test) {
-    // Stable baseline for inherited English diagnostic assertions; locale tests override and restore it.
-    systemProperty 'zombiebuddy.language', 'en'
     // Always run tests, even if build is up-to-date
     outputs.upToDateWhen { false }
 
