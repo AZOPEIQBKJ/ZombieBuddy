@@ -57,6 +57,42 @@ class JavaModInfoTest {
     }
 
     @Test
+    void communityReleaseAcceptsPinnedUpstreamConsumerThroughMetadataParser() throws Exception {
+        Path versionDir = fixture.resolve("LivingHordes/42");
+        Path commonDir = fixture.resolve("LivingHordes/common");
+        Files.createDirectories(versionDir.resolve("media/java"));
+        Files.createDirectories(commonDir);
+        Path jar = versionDir.resolve("media/java/AftermathSystemsLivingHordes.jar");
+        Files.write(jar, new byte[0]); // Metadata parser checks presence; loading is tested separately.
+        Files.writeString(versionDir.resolve("mod.info"), """
+            name=Aftermath Systems: Living Hordes POC
+            id=AftermathSystemsLivingHordesPOC
+            javaJarFile=media/java/AftermathSystemsLivingHordes.jar
+            javaPkgName=aftermathsystems.livinghordes
+            zbVersionMin=2.3.3
+            zbVersionMax=2.3.3
+            """);
+        // Avoid mocking all Lua-facing methods: unitTest deliberately has no game JAR.
+        var versionField = ZombieBuddy.class.getDeclaredField("version");
+        versionField.setAccessible(true);
+        Object previousVersion = versionField.get(null);
+        utilsMock.when(Utils::isServer).thenReturn(false);
+        try {
+            versionField.set(null, "2.3.3-community.4");
+            var parsed = JavaModInfo.parse(versionDir.toString());
+            assertNotNull(parsed, "Pinned API 2.3.3 consumer must reach the JAR loader");
+            assertEquals(jar, parsed.jarPath());
+            assertEquals("aftermathsystems.livinghordes", parsed.javaPkgName());
+            Files.copy(versionDir.resolve("mod.info"), commonDir.resolve("mod.info"));
+            assertNotNull(JavaModInfo.parseMerged(commonDir.toString(), versionDir.toString()));
+            versionField.set(null, "2.3.4-community.1");
+            assertNull(JavaModInfo.parse(versionDir.toString()), "Real core-version limits remain enforced");
+        } finally {
+            versionField.set(null, previousVersion);
+        }
+    }
+
+    @Test
     void rootAdjacentCacheDoesNotHaveAParentFilename() {
         Path root = fixture.toAbsolutePath().getRoot();
         assertNull(JavaModInfo.workshopItemIdFromInfPath(

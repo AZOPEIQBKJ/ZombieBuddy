@@ -116,8 +116,10 @@ public final class Utils {
         if (v1 == null || v1.equals("unknown")) return v2 == null || v2.equals("unknown") ? 0 : -1;
         if (v2 == null || v2.equals("unknown")) return 1;
 
-        String[] parts1 = v1.split("\\.");
-        String[] parts2 = v2.split("\\.");
+        // Compatibility compares the numeric core only. Split off the entire
+        // suffix first so community.3 is not mistaken for a fourth core number.
+        String[] parts1 = v1.split("[-+]", 2)[0].split("\\.");
+        String[] parts2 = v2.split("[-+]", 2)[0].split("\\.");
         int length = Math.max(parts1.length, parts2.length);
         for (int i = 0; i < length; i++) {
             int p1 = 0;

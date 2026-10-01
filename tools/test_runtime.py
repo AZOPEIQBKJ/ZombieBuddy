@@ -77,7 +77,8 @@ def main():
             for error in ("Error transforming", "ERROR applying", "Exception in thread"):
                 assert error not in log, log[-6000:]
             calls = log.count("ZomboidFileSystem.loadMods(0 mods) ...")
-            expected = 0 if jar == baseline else 3
+            # One explicit legacy advice call, plus three engine List calls in Community.
+            expected = 1 if jar == baseline else 4
             assert calls == expected, (name, calls, log[-6000:])
             if duplicate:
                 assert "ignoring duplicate" in log

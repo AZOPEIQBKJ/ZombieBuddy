@@ -1,5 +1,13 @@
 # Community changes
 
+## 2.3.3-community.4
+
+- Fix the compatibility comparator so a dotted distribution suffix such as `-community.3` is not read as a fourth numeric API component. The actual solo test of community.3 rejected Living Hordes pinned to API 2.3.3 before its Java code could load.
+- Preserve real core-version limits, displayed distribution identity, signature checks and approval policy. No consumer dependency relaxation or adapter is required.
+- Restore both original public ArrayList advice descriptors as unannotated forwarding overloads. Only the List overloads are instrumented; existing compiled callers keep linking without a duplicate engine hook.
+- Add regressions for the exact min/max pin through both metadata parsing routes and the packaged JAR with the frozen consumer metadata. See [community.4 evidence](doc/CommunityRelease4Evidence.md).
+- Community.3 remains a recorded failed candidate; do not publish its draft. Community.4 requires a new authorized game session after the interrupted session is recovered.
+
 ## 2.3.3-community.3
 
 - Make the distribution English-only as requested by the maintainer. Remove French Java/Lua catalogues and bilingual publication text. English approval text remains structured and available before game initialization.

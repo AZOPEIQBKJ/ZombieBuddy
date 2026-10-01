@@ -1,6 +1,6 @@
 # Installing the ZombieBuddy Community preview
 
-Version 2.3.3-community.3 is based on Zed's ZombieBuddy 2.3.3. The audited target is PZ 42.21.0. Local checks do not establish gameplay or dedicated-server acceptance. The loading fix is integrated; no Aftermath compatibility JAR is required.
+Version 2.3.3-community.4 is based on Zed's ZombieBuddy 2.3.3. The audited target is PZ 42.21.0. It fixes the dotted-version compatibility rejection observed in community.3. Local checks do not establish gameplay or dedicated-server acceptance. The loading fix is integrated; no Aftermath compatibility JAR is required.
 
 ## Preflight
 
@@ -15,7 +15,7 @@ Stop if `ZombieBuddy.jar.new` exists: the old native loader can replace the JAR 
 ## Files and launching
 
 1. Back up the previous JAR, signatures, mod directory and launch settings outside their active locations. Record original paths and hashes. Retain `.zombie_buddy` approval records.
-2. Copy `Contents/mods/ZombieBuddy` into the selected local mods directory. Enable only one distribution with Mod ID `ZombieBuddy`. The original Workshop item and this fork must not be enabled together; subscriptions and enabled-mod settings are not changed automatically. This preview has no published Workshop item.
+2. Copy `Contents/mods/ZombieBuddy` into the selected local mods directory. Enable only one distribution with Mod ID `ZombieBuddy`. This preview has no published Workshop item. If the original item remains subscribed, B42.21's default `workshop,steam,mods` search order can select it before the local fork. For the reviewed Steam route, add `-modfolders mods,workshop,steam` after the launcher `--` separator (for example `-- -debug -modfolders mods,workshop,steam` when retaining debug). This prioritizes all local duplicate IDs; review that effect and verify the selected Community path in the log. Subscriptions are not changed automatically.
 3. Copy the JAR and sidecar from the mod's `libs/` into the location used by the single agent. A new standard Java-agent Steam launch uses `-javaagent:ZombieBuddy.jar --`, combined with existing options after review. The JAR must be in the launcher's working directory, or use an absolute path.
 4. An installation already using one working `-agentlib:zbNative` can retain that entry while replacing its JAR, once duplicates and pending `.new` updates are ruled out. This package does not supply a new native DLL. That route still needs acceptance in the actual installation.
 5. At the next authorized game test, verify the community version and an actually loaded Java mod. A version watermark alone is not sufficient. Keep normal approval/signature checks; do not bypass a signature problem with `allow-all`.

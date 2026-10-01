@@ -30,6 +30,16 @@ public class Patch_ZomboidFileSystem {
 
     @Patch(className = "zombie.ZomboidFileSystem", methodName = "loadMods")
     public class Patch_loadMods2 {
+        // Keep the original public descriptors for precompiled callers. Only
+        // the List overloads below are advice, so the engine hook runs once.
+        public static void enter(java.util.ArrayList<String> mods, long t0) {
+            enter((List<String>) mods, t0);
+        }
+
+        public static void exit(java.util.ArrayList<String> mods, long t0) {
+            exit((List<String>) mods, t0);
+        }
+
         @Patch.OnEnter
         public static void enter(List<String> mods, @Patch.Local("t0") long t0) {
             Logger.info("ZomboidFileSystem.loadMods(" + mods.size() + " mods) ...");

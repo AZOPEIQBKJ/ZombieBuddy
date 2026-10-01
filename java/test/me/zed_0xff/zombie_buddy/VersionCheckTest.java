@@ -5,6 +5,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class VersionCheckTest {
     @Test
+    void compatibilityIgnoresTheWholeDottedDistributionSuffix() {
+        assertEquals(0, Utils.compareVersions("2.3.3-community.3", "2.3.3"));
+        assertEquals(0, Utils.compareVersions("2.3.3", "2.3.3-community.4"));
+        assertEquals(0, Utils.compareVersions("2.3.3+build.42", "2.3.3"));
+        assertTrue(JavaModInfo.isVersionInRange("2.3.3-community.4", "2.3.3", "2.3.3"));
+        assertFalse(JavaModInfo.isVersionInRange("2.3.3-community.4", "2.3.4", null));
+        assertFalse(JavaModInfo.isVersionInRange("2.3.3-community.4", null, "2.3.2"));
+        assertTrue(Utils.compareVersions("2.3.3.1", "2.3.3") > 0);
+    }
+
+    @Test
     void compareVersions_matchesVersionCheckTestExpectations() {
         assertEquals(0, Utils.compareVersions("1.0.0", "1.0.0"));
         assertEquals(1, Utils.compareVersions("1.1.0", "1.0.0"));

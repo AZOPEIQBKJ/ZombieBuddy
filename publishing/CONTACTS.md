@@ -1,6 +1,6 @@
-# Contact messages — not sent
+# Contact messages and reported outreach
 
-The maintainer reports trying email without a reply. The date and exact message have not been supplied. Do not claim abandonment, permission or exhausted contact routes. Avoid sending the same message everywhere at once.
+On 2026-10-01, the maintainer reported sending all prepared messages. Exact sending dates, channel links, message copies and responses have not been supplied. The drafts below are retained as preparation history, not verified transcripts. No permission, moderation response or abandonment is inferred from sending them. Do not resend automatically.
 
 ## Message to Zed
 
@@ -56,7 +56,7 @@ Thank you.
 | Contact | Current status | Evidence to retain |
 | --- | --- | --- |
 | Email to Zed | Already attempted according to the maintainer; no reply reported | Date and redacted copy when available |
-| Further project/Steam message | Drafted, not sent | Date, link and reply |
-| Moderation advice | Drafted, not sent | Date, copy and reply |
+| Further project/Steam message | Reported sent by the maintainer on 2026-10-01; channels/content not independently verified | Actual sending date, link and reply |
+| Moderation advice | Included in the maintainer's report that all prepared messages were sent; no response supplied | Actual sending date, copy and reply |
 
-Update the contact history before sending the moderation message. These drafts promise neither multiplayer support nor a release date.
+Add exact records and any replies when available. These drafts promise neither multiplayer support nor a release date.

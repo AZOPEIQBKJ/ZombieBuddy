@@ -20,10 +20,11 @@
   "uploaded": false,
   "publicReleaseReady": false,
   "outstanding": [
-    "Complete reviewed reversible installation and authorized solo acceptance with Living Hordes",
+    "Resolve the primary subscription/activation bootstrap without changes to dependent mods",
+    "Recover the interrupted session; Community.3 failed the version filter, Community.4 awaits new solo GO",
     "Observe representative approval rendering and persistent decisions, save/reload and selected installation route",
     "Obtain Host and dedicated/client evidence before claiming those environments",
-    "Record author contact and seek PZ moderation advice before Workshop upload",
+    "Retain exact author/moderation contact records and review any response before Workshop upload; messages reported sent",
     "Publish the prepared prerelease only after acceptance and release decision; create a new Workshop item"
   ],
   "githubSourcePushed": true,
@@ -38,5 +39,14 @@
   "language": "en",
   "englishOnly": true,
   "supersededDraftReleaseId": 401187026,
-  "supersededDraftRemoved": true
+  "supersededDraftRemoved": true,
+  "contactMessagesReportedSent": "2026-10-01",
+  "contactRepliesSupplied": false,
+  "localMigrationVerified": true,
+  "soloSessionAuthorized": "20261001-194524-zbc-lh-solo",
+  "soloSessionStatus": "BLOCKED_VERSION_FILTER_RECOVERY_REQUIRED",
+  "githubDraftBlocked": true,
+  "nextDevelopmentCandidate": "2.3.3-community.4",
+  "primaryObjective": "Transparent replacement for unchanged existing ZombieBuddy mods through subscription and activation",
+  "subscriptionOnlyMigrationVerified": false
 }

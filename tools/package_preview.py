@@ -57,6 +57,9 @@ def main():
         files["doc/Installation_" + language + ".md"] = (ROOT / "doc" / ("Installation_" + language + ".md")).read_bytes()
     files["doc/CommunityEvidence.md"] = (ROOT / "doc/CommunityEvidence.md").read_bytes()
     files["doc/CommunityRelease3Evidence.md"] = (ROOT / "doc/CommunityRelease3Evidence.md").read_bytes()
+    files["doc/CommunityRelease4Evidence.md"] = (ROOT / "doc/CommunityRelease4Evidence.md").read_bytes()
+    files["doc/DropInCompatibility.md"] = (ROOT / "doc/DropInCompatibility.md").read_bytes()
+    files["doc/DropInCompatibility.md"] = (ROOT / "doc/DropInCompatibility.md").read_bytes()
     for source in sorted((ROOT / "licenses").iterdir()):
         if source.is_file(): files["licenses/" + source.name] = source.read_bytes()
     files["tools/preflight.py"] = (ROOT / "tools/preflight.py").read_bytes()
@@ -71,6 +74,14 @@ def main():
     assert localization["jarSha256"] == sha(jar.read_bytes())
     assert localization["englishOnlyCatalogue"] and localization["nonEnglishLocaleChecked"]
     files["evidence/localization-check.json"] = (ROOT / "artifacts/localization-check.json").read_bytes()
+    consumer = json.loads((ROOT / "artifacts/consumer-metadata-check.json").read_text())
+    assert consumer["candidateSha256"] == sha(jar.read_bytes())
+    assert consumer["community3Rejected"] and consumer["candidateAccepted"]
+    files["evidence/consumer-metadata-check.json"] = (ROOT / "artifacts/consumer-metadata-check.json").read_bytes()
+    api_surface = json.loads((ROOT / "artifacts/api-surface.json").read_text())
+    assert api_surface["candidateSha256"] == sha(jar.read_bytes())
+    assert not api_surface["missingDeclaredMembers"]
+    files["evidence/api-surface.json"] = (ROOT / "artifacts/api-surface.json").read_bytes()
     manifest = dict(distribution="ZombieBuddy Community", version=version, upstream="2.3.3",
         upstreamCommit="0ddf161c27848f12d09e74de7fadbea9d50e621d", sourceCommit=commit,
         targetGameSha256=runtime["gameSha256"], tests=tests, gameplayAccepted=False,

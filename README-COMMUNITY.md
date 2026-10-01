@@ -5,7 +5,7 @@ Independent maintenance preview by Aftermath Systems, based on ZombieBuddy 2.3.3
 
 - [Installation in English](doc/Installation_EN.md)
 - [Changes and acceptance limits](COMMUNITY_CHANGELOG.md)
-- [Current evidence](doc/CommunityRelease3Evidence.md) and [original regression baseline](doc/CommunityEvidence.md)
+- [Current evidence](doc/CommunityRelease4Evidence.md) and [original regression baseline](doc/CommunityEvidence.md)
 - [MIT licence](LICENSE.txt) and [third party notices](THIRD_PARTY_NOTICES.md)
 
 The preview preserves the public 2.x packages, annotations, `ZombieBuddy` Mod ID and existing mod-approval policy. Enable only one ZombieBuddy distribution. Automatic replacement of the framework JAR is disabled for previews; updates are manual. `.zbs` signatures and the verified author registry remain enforced as before.

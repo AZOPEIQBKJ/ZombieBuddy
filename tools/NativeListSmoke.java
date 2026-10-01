@@ -16,6 +16,10 @@ public final class NativeListSmoke {
         }
         // This descriptor is compiled against the baseline: a reflection-only test is insufficient.
         Loader.loadMods(new ArrayList<String>());
+        // Retain even the original public advice descriptors for binary callers.
+        long started = System.nanoTime();
+        me.zed_0xff.zombie_buddy.patches.Patch_ZomboidFileSystem.Patch_loadMods2.enter(new ArrayList<String>(), started);
+        me.zed_0xff.zombie_buddy.patches.Patch_ZomboidFileSystem.Patch_loadMods2.exit(new ArrayList<String>(), started);
         if (args.length > 0 && args[0].equals("community")) {
             var reorder = Loader.class.getDeclaredMethod("autoFixModOrder", List.class);
             reorder.setAccessible(true);
