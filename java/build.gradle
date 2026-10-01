@@ -240,7 +240,8 @@ tasks.named("check") {
 tasks.named("build") {
     dependsOn check
     dependsOn shadowJar
-    finalizedBy copyNativeDll
+    // Community preview uses the standard Java agent on every platform.
+    // Do not distribute the upstream native updater/installer implicitly.
 }
 
 tasks.named("assemble") {
@@ -252,6 +253,7 @@ copyNativeDll.mustRunAfter shadowJar
 
 // disable annotation processing, JNI headers, and incremental compilation
 tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
     options.annotationProcessorPath = files()
     options.generatedSourceOutputDirectory.set(provider { null })
     options.headerOutputDirectory.set(provider { null })
@@ -260,6 +262,16 @@ tasks.withType(JavaCompile).configureEach {
     doLast {
         delete "${buildDir}/tmp"
     }
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+processResources {
+    from('../LICENSE.txt') { into 'META-INF/community' }
+    from('../licenses') { into 'META-INF/community/licenses' }
 }
 
 // Helper to recursively check for .class files

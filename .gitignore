@@ -12,3 +12,15 @@
 
 build
 tmp
+
+artifacts/
+**/*.private.der
+**/*.private.pem
+**/ed25519-private*
+**/*.p12
+**/*.pfx
+**/*.jks
+java/.config/
+!java/gradle/wrapper/gradle-wrapper.jar
+__pycache__/
+*.pyc

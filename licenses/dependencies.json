@@ -1,0 +1,22 @@
+[
+  {
+    "artifact": "byte-buddy-1.18.8.jar",
+    "sha256": "227d3e0ad51915809143f6a744ac0f4cb21f03214dab28e52ee7007c5ad7e9d9"
+  },
+  {
+    "artifact": "byte-buddy-agent-1.18.8.jar",
+    "sha256": "e303594d597de090abcb54580aa788478fc5e58f259e6ae914a1115f207c43af"
+  },
+  {
+    "artifact": "classgraph-4.8.184.jar",
+    "sha256": "6e564e29cec95a392268a609f09071d56199383d906ac70e91753a7998d1a3e8"
+  },
+  {
+    "artifact": "bcprov-jdk18on-1.78.1.jar",
+    "sha256": "add5915e6acfc6ab5836e1fd8a5e21c6488536a8c1f21f386eeb3bf280b702d7"
+  },
+  {
+    "artifact": "gson-2.12.1.jar",
+    "sha256": "ebee13d5fb7477cd7f1cc010e0c356df8ca80709715248da97f79e35ccb4fbec"
+  }
+]
