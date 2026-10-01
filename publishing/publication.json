@@ -26,5 +26,13 @@
     "Record author contact and seek PZ moderation advice before Workshop upload",
     "Publish the prepared prerelease only after acceptance and release decision; create a new Workshop item"
   ],
-  "githubSourcePushed": false
+  "githubSourcePushed": true,
+  "githubDefaultBranch": "community-42.21",
+  "githubIssuesEnabled": true,
+  "githubPrivateVulnerabilityReporting": true,
+  "githubDraftReleaseId": 401187026,
+  "githubDraftReleaseUrl": "https://github.com/AZOPEIQBKJ/ZombieBuddy/releases/tag/untagged-a8ab034e1d6216fca24f",
+  "githubReleasePublished": false,
+  "githubDraftAssetsVerified": true,
+  "workshopUploaded": false
 }

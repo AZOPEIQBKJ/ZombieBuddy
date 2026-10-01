@@ -12,6 +12,8 @@ Préparation du 1er octobre 2026. Nom confirmé : **ZombieBuddy Community**, com
 
 ## Sources et release GitHub
 
+Réalisé : branche source publiée, branche par défaut communautaire, Issues et signalement privé activés. Release GitHub préparée en brouillon avec ses trois fichiers ; empreintes SHA-256 côté GitHub identiques aux fichiers locaux. Aucun binaire publié ni item Workshop envoyé.
+
 L'authentification Git existante permet la préparation du dépôt sans créer de jeton ou nouveau compte. Pousser uniquement notre branche vers `origin` sous `community-42.21`, sans force. L'historique upstream, `master`, `patch-1` et `v2x` restent conservés. La branche communautaire doit être la branche par défaut, Issues activé et le signalement privé de vulnérabilité disponible avant diffusion.
 
 La release **draft + pre-release** doit viser le commit exact contenu dans le manifeste du ZIP, avec le tag `v2.3.3-community.2`. Joindre uniquement `ZombieBuddyCommunity-2.3.3-community.2.zip`, `manifest.json` et `SHA256SUMS.txt`. Les archives de sources automatiques ne sont pas le paquet installable. Ne pas diffuser le JAR du jeu, une clé privée, les dossiers de travail ou le kit préparatoire entier. La CI publique ne peut pas être présentée comme ayant testé le moteur sans installation légitime.
