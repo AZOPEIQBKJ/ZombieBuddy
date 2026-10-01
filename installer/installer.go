@@ -1001,10 +1001,13 @@ func patchVDF(path string) (bool, error) {
 
 	currentOptions := launchOptionsFromConfig(pz)
 
-	newOptions := ZB_LAUNCH_OPTIONS
 	if hasZombieBuddyLaunchOptions(currentOptions) {
 		fmt.Println("[-] Launch options already contain ZombieBuddy agent.")
 		return false, nil
+	}
+	newOptions, err := mergeSteamLaunchOptions(currentOptions)
+	if err != nil {
+		return false, err
 	}
 
 	waitForSteamToClose("launch option update")
@@ -1142,6 +1145,8 @@ func navigateMap(m map[string]interface{}, path ...string) (map[string]interface
 }
 
 func manualPatchVDF(path, oldOpts, newOpts string) error {
+	// Values returned by the VDF parser are decoded; escape once on writing.
+	newOpts = strings.NewReplacer(`\`, `\\`, `"`, `\"`).Replace(newOpts)
 	input, err := os.ReadFile(path)
 	if err != nil {
 		return err
