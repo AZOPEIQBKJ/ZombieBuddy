@@ -12,7 +12,11 @@ Read `doc/Installation_EN.md` in the archive for migration and rollback. Keep on
 
 ## Frozen assets
 
-Source commit and archive hashes are filled from the frozen manifest before upload. Attach the named ZIP, `manifest.json` and `SHA256SUMS.txt`.
+Source: `e6605001cbfb136258fe9e45ac4731754d5c87e2`.
+
+ZIP: `ZombieBuddyCommunity-2.3.3-community.3.zip`. SHA-256: `d20717f5372d16ecac959480748c34c52ba4e109cae6946903267cabbfbba07e`.
+
+Agent SHA-256: `40c73114a14614ef6288f57657d77aafbe959f5ea550c3c6730ea0d5c85f1702`. The ZIP, `manifest.json` and `SHA256SUMS.txt` are the three release assets.
 
 Signing identity: Aftermath Systems, Ed25519 `.zbs`, not Zed's X.509 signature. Public key: `989ac279f40f1a35fa0616645e319fc44cde9a15a842b7c365870147bfff3ce0`. Establish this key independently from the maintainer's verified identity.
 
