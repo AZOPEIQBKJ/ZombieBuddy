@@ -22,6 +22,7 @@ The maintainer accepted a one-time Community installation/migration on 2026-10-0
 - VERIFIED in PZ 42.21 `MainScreenState.main`: `-modfolders` consumes the following comma-separated token after the launcher `--` separator. `ZomboidFileSystem.getAllModFolders` uses that order; `setModIdToDir` uses `putIfAbsent`.
 - VERIFIED in isolated Community.4 JVM checks: the standard `-javaagent` route loads the integrated framework. No native DLL needs to be distributed for this route. The original native agent may remain inert on disk for rollback.
 - VERIFIED in the frozen release manifest: the package targets game SHA-256 `e1a69eb743ede60b213a0fe7f8b83d4fcab773036d256cc4543a336f3b058a33`. Other engine builds require a new audit before enabling installation.
+- VERIFIED in the Go 1.25.5 Windows syscall wrappers and [Microsoft's process-snapshot documentation](https://learn.microsoft.com/en-us/windows/win32/toolhelp/taking-a-snapshot-and-viewing-processes): Toolhelp enumeration provides executable names without opening processes or changing their state. The installer only reads this snapshot and closes its handle.
 - PENDING: actual normal Steam launch after this installer, Steam UI selection with original dependencies downloaded, save/reload and real multiplayer. Local fixtures and engine-bytecode checks do not establish these observations.
 
 ## Installation design
@@ -38,9 +39,10 @@ Installation never starts the game or enables mods in an existing save. The play
 
 ## Local evidence
 
-- Go 1.25.5 on Windows: 16 top-level tests / 34 passing leaf scenarios, plus `go vet`. One symbolic-link creation test is skipped because this account cannot create symbolic links; the real Windows directory-junction refusal test passes.
+- Go 1.25.5 on Windows: the fixture suite covers installation and recovery, plus `go vet`. One symbolic-link creation test is skipped because this account cannot create symbolic links; the real Windows directory-junction refusal test passes. The packaged test log records the exact counts.
 - Fixtures cover fresh installation, original migration, the complete frozen runtime payload, repeated installation, every planned write interrupted, rollback interrupted and resumed, changed files/backups, later unrelated Steam changes, missing app/options blocks, ambiguous launch settings, a changed engine after preview and concurrent installers.
 - The engine-selection probe uses the audited 42.21 classes, real mod-directory discovery and `ChooseGameInfo.getModDetails`. The installed-item list and mod metadata are fixtures. Default order selects the original framework; local-first order selects Community and retains the consumer. This is not a native Steam, UI, game-loop or server acceptance test.
 - An executable read-only plan against the development installation found only the expected native-to-standard-agent JSON change; 14 installed/configuration files stayed byte-identical. No installer was applied to the user's installation and no game was launched.
+- Installer `0.1.0-preview.1` failed closed when this execution environment denied its external `tasklist` process query; the write-capable CLI changed no fixture files. Preview.2 uses the standard Windows Toolhelp process snapshot API directly, with an actual enumeration test and checks for running Steam/PZ/Java. Preview.1 remains an immutable local artifact and must not be published.
 
 The packaged manifest records the source commit, runtime/executable checksums, engine report and complete installer test log. Actual normal Steam launch, approval behavior, save/reload and multiplayer remain pending. The unchanged runtime retains its separate Community.4 evidence; installer tests do not upgrade that evidence to gameplay acceptance.

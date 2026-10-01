@@ -3,7 +3,7 @@
 package main
 
 import (
-	"encoding/csv"
+	"errors"
 	"fmt"
 	"os"
 	"os/exec"
@@ -24,27 +24,55 @@ func hiddenCommand(name string, args ...string) *exec.Cmd {
 }
 
 func stoppedGuard() error {
-	output, err := hiddenCommand("tasklist.exe", "/FO", "CSV", "/NH").Output()
+	names, err := runningProcessNames()
 	if err != nil {
-		return fmt.Errorf("could not check running processes; no installation changes are allowed")
+		return fmt.Errorf("could not check running processes; no installation changes are allowed: %w", err)
 	}
-	rows, err := csv.NewReader(strings.NewReader(string(output))).ReadAll()
-	if err != nil || len(rows) == 0 {
-		return fmt.Errorf("could not parse running processes")
-	}
-	for _, row := range rows {
-		if len(row) == 0 {
-			continue
-		}
-		name := strings.ToLower(row[0])
-		if name == "steam.exe" || name == "java.exe" || name == "javaw.exe" || strings.HasPrefix(name, "projectzomboid") {
-			return fmt.Errorf("close Steam, Project Zomboid and Java processes normally before installing or rolling back (still running: %s)", row[0])
-		}
+	if err := checkProcessNames(names); err != nil {
+		return err
 	}
 	for _, name := range []string{"JAVA_TOOL_OPTIONS", "_JAVA_OPTIONS", "JDK_JAVA_OPTIONS"} {
 		value := strings.ToLower(os.Getenv(name))
 		if strings.Contains(value, "zombiebuddy") || strings.Contains(value, "zbnative") {
 			return fmt.Errorf("%s also configures ZombieBuddy; review it before installation", name)
+		}
+	}
+	return nil
+}
+
+func runningProcessNames() ([]string, error) {
+	snapshot, err := syscall.CreateToolhelp32Snapshot(syscall.TH32CS_SNAPPROCESS, 0)
+	if err != nil {
+		return nil, err
+	}
+	defer syscall.CloseHandle(snapshot)
+	var entry syscall.ProcessEntry32
+	entry.Size = uint32(unsafe.Sizeof(entry))
+	if err := syscall.Process32First(snapshot, &entry); err != nil {
+		return nil, err
+	}
+	var names []string
+	for {
+		names = append(names, syscall.UTF16ToString(entry.ExeFile[:]))
+		err = syscall.Process32Next(snapshot, &entry)
+		if errors.Is(err, syscall.ERROR_NO_MORE_FILES) {
+			break
+		}
+		if err != nil {
+			return nil, err
+		}
+	}
+	return names, nil
+}
+
+func checkProcessNames(names []string) error {
+	if len(names) == 0 {
+		return fmt.Errorf("empty process snapshot; no installation changes are allowed")
+	}
+	for _, raw := range names {
+		name := strings.ToLower(raw)
+		if name == "steam.exe" || name == "java.exe" || name == "javaw.exe" || strings.HasPrefix(name, "projectzomboid") {
+			return fmt.Errorf("close Steam, Project Zomboid and Java processes normally before installing or rolling back (still running: %s)", raw)
 		}
 	}
 	return nil

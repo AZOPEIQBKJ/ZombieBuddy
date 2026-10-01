@@ -1,5 +1,10 @@
 # Community changes
 
+## Windows installer 0.1.0-preview.2
+
+- Read running processes directly through Windows Toolhelp APIs. The external `tasklist` call used by preview.1 was denied by the execution environment during CLI verification; that attempt stopped without writing fixture files.
+- Keep the same runtime and migration behavior. Add real process enumeration and process-name guard tests. Preserve preview.1 unchanged as an unpublished historical artifact.
+
 ## Windows installer 0.1.0-preview.1
 
 - Add a separate offline Community installer for the normal Windows Steam launcher. Embed and verify the immutable Community.4 runtime archive and Community Ed25519 signature; no new runtime build, native DLL, private key or game binary is included.

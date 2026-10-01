@@ -10,7 +10,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE_SHA = "f1b66cf9e11aac8663de92de382944a979cb4f09e651d320d8d3938b471a3c99"
-VERSION = "0.1.0-preview.1"
+VERSION = "0.1.0-preview.2"
 
 
 def main():

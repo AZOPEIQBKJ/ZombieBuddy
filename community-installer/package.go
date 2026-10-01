@@ -15,7 +15,7 @@ import (
 	"strings"
 )
 
-const installerVersion = "0.1.0-preview.1"
+const installerVersion = "0.1.0-preview.2"
 const runtimeVersion = "2.3.3-community.4"
 const archiveHash = "f1b66cf9e11aac8663de92de382944a979cb4f09e651d320d8d3938b471a3c99"
 const gameHash = "e1a69eb743ede60b213a0fe7f8b83d4fcab773036d256cc4543a336f3b058a33"
