@@ -26,6 +26,7 @@ type plan struct {
 	Changes   []change
 	Payload   map[string][]byte
 	GameSHA   string
+	NativeSHA string
 }
 type fileRecord struct {
 	Area           string `json:"area"`
@@ -104,7 +105,7 @@ func fileDigest(path string) (string, error) {
 func targetPath(loc locations, area, name string, payload map[string][]byte) (string, error) {
 	switch area {
 	case "game":
-		if name == "ZombieBuddy.jar" || name == "ZombieBuddy.jar.zbs" || name == "ProjectZomboid64.json" {
+		if name == "ZombieBuddy.jar" || name == "ZombieBuddy.jar.zbs" || name == "ProjectZomboid64.json" || name == "zbNative.dll" {
 			return filepath.Join(loc.Game, name), nil
 		}
 	case "mod":
@@ -143,11 +144,21 @@ func validateLocations(loc locations) error {
 
 func buildPlan(loc locations, payload map[string][]byte, expectedGame string) (plan, error) {
 	p := plan{Locations: loc, Payload: payload, GameSHA: expectedGame}
+	if err := verifyNativeLoader(embeddedNativeLoader); err != nil {
+		return p, err
+	}
 	if err := validateLocations(loc); err != nil {
 		return p, err
 	}
 	if hash, err := fileDigest(filepath.Join(loc.Game, "projectzomboid.jar")); err != nil || hash != expectedGame {
 		return p, fmt.Errorf("game JAR is not the audited PZ 42.21 build")
+	}
+	if data, exists, err := readFile(filepath.Join(loc.Game, "zbNative.dll")); err != nil {
+		return p, err
+	} else if exists && digest(data) != nativeLoaderHash {
+		return p, fmt.Errorf("existing zbNative.dll differs from the audited loader; installation unchanged")
+	} else if exists {
+		p.NativeSHA = digest(data)
 	}
 	if _, exists, err := readFile(filepath.Join(loc.Game, "ZombieBuddy.jar.new")); err != nil || exists {
 		return p, fmt.Errorf("pending or unreadable ZombieBuddy.jar.new; resolve it before installation")
@@ -206,6 +217,9 @@ func buildPlan(loc locations, payload map[string][]byte, expectedGame string) (p
 		if err := add("game", name, payload["libs/"+name]); err != nil {
 			return p, err
 		}
+	}
+	if err := add("game", "zbNative.dll", embeddedNativeLoader); err != nil {
+		return p, err
 	}
 	steam, exists, err := readFile(loc.SteamConfig)
 	if err != nil || !exists {
@@ -379,6 +393,9 @@ func applyPlan(p plan, guard func() error, beforeWrite func(int) error) (string,
 	defer release()
 	if err := guard(); err != nil {
 		return "", err
+	}
+	if hash, err := fileDigest(filepath.Join(p.Locations.Game, "zbNative.dll")); err != nil || hash != p.NativeSHA {
+		return "", fmt.Errorf("native loader changed since preview")
 	}
 	if len(p.Changes) == 0 {
 		return "", nil

@@ -169,7 +169,9 @@ func configureLauncher(data []byte, steamTails []string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	agent := "-javaagent:ZombieBuddy.jar"
+	// The normal embedded-JVM launcher cannot resolve instrument.dll dependencies
+	// with a bare -javaagent. The native bootstrap sets the bundled JRE DLL path.
+	agent := "-agentlib:zbNative"
 	if tail != "" {
 		agent += "=" + tail
 	}

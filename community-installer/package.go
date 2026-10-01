@@ -15,18 +15,32 @@ import (
 	"strings"
 )
 
-const installerVersion = "0.1.0-preview.2"
+const installerVersion = "0.1.0-preview.3"
 const runtimeVersion = "2.3.3-community.4"
 const archiveHash = "f1b66cf9e11aac8663de92de382944a979cb4f09e651d320d8d3938b471a3c99"
 const gameHash = "e1a69eb743ede60b213a0fe7f8b83d4fcab773036d256cc4543a336f3b058a33"
 const signingKey = "989ac279f40f1a35fa0616645e319fc44cde9a15a842b7c365870147bfff3ce0"
 const signingAuthor = "76561198061324182"
 const payloadPrefix = "Contents/mods/ZombieBuddy/"
+const nativeLoaderHash = "c2ae9335e717ee24b2f4a40d1a3bf77f1519762a72a0459e766a2bbafc077f6c"
 
 // Filled by tools/build_installer.py from the immutable, independently verified archive.
 //
 //go:embed payload.zip
 var embeddedPackage []byte
+
+// Unmodified MIT-licensed upstream Windows bootstrap, independently pinned.
+// It establishes the bundled JRE DLL search path before loading instrumentation.
+//
+//go:embed native-loader.dll
+var embeddedNativeLoader []byte
+
+func verifyNativeLoader(data []byte) error {
+	if digest(data) != nativeLoaderHash {
+		return fmt.Errorf("embedded native loader checksum mismatch")
+	}
+	return nil
+}
 
 var sourceCommit = "development"
 

@@ -194,7 +194,7 @@ func showPlan(p plan) {
 	fmt.Printf("\nRuntime: %s (verified embedded package and Community signature)\n", runtimeVersion)
 	fmt.Printf("Game: %s\nProfile: %s\nSteam account: %s\n", p.Locations.Game, p.Locations.Profile, p.Locations.SteamConfig)
 	fmt.Println("Normal Windows Steam launcher only. No game launch or subscription changes.")
-	fmt.Println("One Java agent; existing mod approvals and saves are retained.")
+	fmt.Println("One native bootstrap loads the Community Java framework; existing mod approvals and saves are retained.")
 	fmt.Println("Local mods will take priority over Workshop copies, including other duplicate Mod IDs.")
 	fmt.Println("Keep the original Workshop dependency downloaded if another mod needs it.")
 	if len(p.Changes) == 0 {

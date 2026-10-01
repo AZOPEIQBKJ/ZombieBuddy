@@ -64,7 +64,7 @@ func TestMigrationFreshAndRepeatRollback(t *testing.T) {
 			loc, payload, hash := fixture(t)
 			if existing {
 				writeTest(t, filepath.Join(loc.Game, "ZombieBuddy.jar"), []byte("original framework"))
-				writeTest(t, filepath.Join(loc.Game, "zbNative.dll"), []byte("retain native DLL"))
+				writeTest(t, filepath.Join(loc.Game, "zbNative.dll"), embeddedNativeLoader)
 			}
 			beforeJSON := readTest(t, filepath.Join(loc.Game, "ProjectZomboid64.json"))
 			beforeSteam := readTest(t, loc.SteamConfig)
@@ -75,6 +75,9 @@ func TestMigrationFreshAndRepeatRollback(t *testing.T) {
 			receiptPath, err := applyPlan(p, noProcesses, nil)
 			if err != nil {
 				t.Fatal(err)
+			}
+			if digest(readTest(t, filepath.Join(loc.Game, "zbNative.dll"))) != nativeLoaderHash {
+				t.Fatal("native bootstrap missing or changed")
 			}
 			p2, err := buildPlan(loc, payload, hash)
 			if err != nil {
@@ -110,11 +113,16 @@ func TestMigrationFreshAndRepeatRollback(t *testing.T) {
 				if string(readTest(t, filepath.Join(loc.Game, "ZombieBuddy.jar"))) != "original framework" {
 					t.Fatal("original JAR lost")
 				}
-				if string(readTest(t, filepath.Join(loc.Game, "zbNative.dll"))) != "retain native DLL" {
+				if !bytes.Equal(readTest(t, filepath.Join(loc.Game, "zbNative.dll")), embeddedNativeLoader) {
 					t.Fatal("native DLL changed")
 				}
 			} else if _, err := os.Stat(filepath.Join(loc.Game, "ZombieBuddy.jar")); !os.IsNotExist(err) {
 				t.Fatal("fresh JAR not removed")
+			}
+			if !existing {
+				if _, err := os.Stat(filepath.Join(loc.Game, "zbNative.dll")); !os.IsNotExist(err) {
+					t.Fatal("fresh native loader not removed on rollback")
+				}
 			}
 			if string(readTest(t, filepath.Join(loc.Profile, "Saves", "existing.bin"))) != "save to retain" {
 				t.Fatal("save changed")
@@ -265,6 +273,7 @@ func TestConcurrentAndUnexpectedChangesArePreserved(t *testing.T) {
 	})
 	t.Run("bad-backup", func(t *testing.T) {
 		loc, payload, hash := fixture(t)
+		writeTest(t, filepath.Join(loc.Game, "ZombieBuddy.jar"), []byte("existing runtime to back up"))
 		p, err := buildPlan(loc, payload, hash)
 		if err != nil {
 			t.Fatal(err)
@@ -273,11 +282,16 @@ func TestConcurrentAndUnexpectedChangesArePreserved(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
+		damaged := false
 		for i, c := range p.Changes {
 			if c.BeforeExists && c.Area != "steam" {
 				writeTest(t, filepath.Join(filepath.Dir(receiptPath), "before-"+strconv.Itoa(i)), []byte("damaged backup"))
+				damaged = true
 				break
 			}
+		}
+		if !damaged {
+			t.Fatal("fixture did not exercise a damaged file backup")
 		}
 		if err := rollback(receiptPath, payload, noProcesses); err == nil {
 			t.Fatal("damaged backup accepted")
@@ -379,7 +393,7 @@ func TestOptionsAndJSONContracts(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if strings.Count(string(after), "-javaagent:ZombieBuddy.jar") != 1 || strings.Contains(string(after), "-agentlib") || !strings.Contains(string(after), "Another.jar") || !strings.Contains(string(after), "unknown") {
+	if strings.Count(string(after), "-agentlib:zbNative") != 1 || strings.Contains(string(after), "ZombieBuddy.jar") || !strings.Contains(string(after), "Another.jar") || !strings.Contains(string(after), "unknown") {
 		t.Fatal(string(after))
 	}
 	again, err := configureLauncher(after, nil)

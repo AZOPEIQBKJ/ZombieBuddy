@@ -20,8 +20,8 @@
   "uploaded": false,
   "publicReleaseReady": false,
   "outstanding": [
-    "Complete actual normal Steam installation/launch and distribution-selection acceptance without changes to dependent mods; installer and engine-selection fixtures pass",
-    "Community.4 development deployment verified after session recovery; new solo session GO and actual acceptance pending",
+    "Diagnose normal Steam startup exit code 1 before menu during session 20261001-212000-zbc-installer-c4; CLI installation succeeded but game loading and distribution selection remain unaccepted",
+    "Community.4 remains installed after exact QA-profile restoration; no current Community/LH loading marker and no implicit second game-session GO",
     "Observe representative approval rendering and persistent decisions, save/reload and selected installation route",
     "Obtain Host and dedicated/client evidence before claiming those environments",
     "Retain exact author/moderation contact records and review any response before Workshop upload; messages reported sent",
@@ -43,8 +43,8 @@
   "contactMessagesReportedSent": "2026-10-01",
   "contactRepliesSupplied": false,
   "localMigrationVerified": true,
-  "soloSessionAuthorized": "20261001-194524-zbc-lh-solo",
-  "soloSessionStatus": "BLOCKED_RESULT_RECOVERED_CORRECTION_DEPLOYED_NOT_GAME_ACCEPTED",
+  "soloSessionAuthorized": "20261001-212000-zbc-installer-c4",
+  "soloSessionStatus": "BLOCKED_EARLY_STEAM_STARTUP_PROFILE_RESTORED",
   "githubDraftBlocked": true,
   "nextDevelopmentCandidate": "2.3.3-community.4",
   "primaryObjective": "Compatible replacement for unchanged existing ZombieBuddy mods after an accepted one-time Community installation/migration and activation",
@@ -63,10 +63,13 @@
     "platform": "windows-amd64",
     "localChecksPassed": true,
     "gameplayAccepted": false,
-    "appliedToUserInstallation": false,
+    "appliedToUserInstallation": true,
     "published": false,
     "authenticodeSigned": false,
     "supersedesInstallerVersion": "0.1.0-preview.1",
-    "stage": "LOCAL_CHECKS_PASSED_NOT_GAME_ACCEPTED"
+    "stage": "BLOCKED_NORMAL_STEAM_STARTUP",
+    "acceptanceSession": "20261001-212000-zbc-installer-c4",
+    "observedBlocker": "Normal Steam process exited 1 before menu after about three seconds; cause unestablished and previous console stale",
+    "temporaryProfileRestored": true
   }
 }
