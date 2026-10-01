@@ -1,0 +1,12 @@
+{
+  "UI_ZBC_InstallMissing": "<H1> ZombieBuddy Community n'est pas chargé. <LINE> <LINE> <TEXT> Le mod est activé, mais son agent Java est absent. Fermez le jeu et suivez le guide Installation_FR.md fourni avec cette version. <LINE> <LINE> Utilisez une seule distribution de ZombieBuddy. Les corrections 42.21 sont déjà intégrées : aucun adaptateur Aftermath supplémentaire n'est nécessaire. <LINE> <LINE> Conservez vos autres paramètres de lancement et vérifiez les anciens réglages avant d'ajouter un agent.",
+  "UI_ZB_Install_Windows": "<H1> Installation de ZombieBuddy Community requise. <LINE> <TEXT> Consultez Installation_FR.md fourni avec cette version.",
+  "UI_ZB_Install_Unix": "<H1> Installation de ZombieBuddy Community requise. <LINE> <TEXT> Consultez Installation_FR.md fourni avec cette version.",
+  "UI_ZB_AutoFixModOrder": "Corriger l'ordre des mods au démarrage",
+  "UI_ZB_FixApprovalDialogCursor": "Rétablir le curseur dans la fenêtre d'approbation",
+  "UI_ZB_SuppressSandboxLog": "Masquer le journal des options du bac à sable",
+  "UI_ZB_WatermarkOpacity": "Opacité de l'indication ZombieBuddy",
+  "UI_ZB_AutoFixModOrder_desc": "Place ZombieBuddy, zdk et ZModUnbork en tête lorsqu'ils sont présents, en conservant l'ordre des autres mods.",
+  "UI_ZB_FixApprovalDialogCursor_desc": "Rétablit le curseur visible lorsque la fenêtre d'approbation des mods Java est ouverte.",
+  "UI_ZB_SuppressSandboxLog_desc": "Masque la liste des variables du bac à sable écrite par le jeu au démarrage."
+}

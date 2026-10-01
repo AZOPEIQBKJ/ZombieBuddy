@@ -1,6 +1,6 @@
 if not PZAPI or not PZAPI.ModOptions then return end
 
-local options = PZAPI.ModOptions:create("ZombieBuddy", "ZombieBuddy")
+local options = PZAPI.ModOptions:create("ZombieBuddy", "ZombieBuddy Community")
 
 local config = {
     watermarkOpacity   = options:addSlider( "watermarkOpacity",    "UI_ZB_WatermarkOpacity", 0.0, 1.0, 0.05, 0.4 ),
@@ -22,6 +22,9 @@ config.watermarkOpacity.onChange = onChangeWatermarkOpacity
 -- ---------------------------------------------------------------------------
 
 local function applySettings()
+    -- The Workshop Lua can be enabled before the Java agent is installed.
+    -- ZombieBuddy.lua retains the existing installation notification.
+    if not ZombieBuddy then return end
     if ZombieBuddy.setAutoFixModOrder then
         ZombieBuddy.setAutoFixModOrder(config.autoFixModOrder:getValue())
     end

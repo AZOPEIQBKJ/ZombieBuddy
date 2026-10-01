@@ -1,10 +1,9 @@
-name=ZombieBuddy
+name=ZombieBuddy Community
 id=ZombieBuddy
-author=Zed
-url=https://github.com/zed-0xff/ZombieBuddy
+author=Zed; community maintenance by Aftermath Systems
 poster=icon_256.png
 icon=icon_128.png
-description=Java bytecode manipulation framework for Project Zomboid. Enables runtime patching of game classes and Lua integration for advanced modding.
+description=Community maintenance preview for PZ 42.21, based on ZombieBuddy by Zed. / Version communautaire de maintenance pour PZ 42.21, basee sur ZombieBuddy de Zed.
 
 javaJarFile=../libs/ZombieBuddy.jar
 javaPkgName=me.zed_0xff.zombie_buddy
