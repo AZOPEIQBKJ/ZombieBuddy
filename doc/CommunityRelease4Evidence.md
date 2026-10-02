@@ -1,5 +1,7 @@
 # Community.4 — dotted version suffix compatibility
 
+**Later acceptance, 1 October:** normal Steam startup and three updated Java consumers were observed manually. See [current status](CommunityReleaseStatus.md). The freeze-time descriptions below retain their historical scope.
+
 On 2026-10-01, a real Steam launch loaded and displayed Community.3 from the local distribution and verified its signature. Living Hordes Java was rejected before loading: its unchanged `zbVersionMin=2.3.3` / `zbVersionMax=2.3.3` did not contain the incorrectly interpreted framework version. No world was created. UI control was interrupted with Escape while PZ was still open; the operator stopped and marked recovery required. No subsequent game acceptance is claimed.
 
 ## Root cause and correction

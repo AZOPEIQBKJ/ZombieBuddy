@@ -88,6 +88,10 @@ def main():
     for name in ("README.md", "README-COMMUNITY.md", "SUPPORT.md", "LICENSE.txt",
                  "THIRD_PARTY_NOTICES.md", "COMMUNITY_CHANGELOG.md"):
         shutil.copyfile(ROOT / name, materials / name)
+    # Frozen runtime archives keep their original documentation. The new Workshop
+    # preparation uses current installation/status text without changing the JAR.
+    for name in ("Installation_EN.md", "CommunityInstaller.md", "DropInCompatibility.md", "CommunityReleaseStatus.md"):
+        shutil.copyfile(ROOT / "doc" / name, mod / "doc" / name)
     (materials / "tools").mkdir()
     for name in ("prepare_publication.py", "ValidateWorkshopDraft.java", "preflight.py", "VerifyZbs.java"):
         shutil.copyfile(ROOT / "tools" / name, materials / "tools" / name)
@@ -104,13 +108,14 @@ def main():
         candidateZipSha256=config["candidateZipSha256"],
         candidateJarSha256=config["candidateJarSha256"],
         workshopVisibility="private", workshopItemId=None,
-        retainsFrozenRuntimeAssets=True, originalCommunityArtworkInRuntime=True,
+        retainsFrozenRuntimeAssets=True, currentInstallationDocsIncluded=True,
+        originalCommunityArtworkInRuntime=True,
         outstanding=config["outstanding"])
     (output / "PREPARATION_STATUS.json").write_text(json.dumps(status, indent=2) + "\n", encoding="utf-8")
     (output / "READ_ME_FIRST.txt").write_text(
         "LOCAL WORKSHOP PREPARATION\n"
         "Not ready for public release. No upload, install or game launch was performed.\n"
-        "workshop-draft uses the frozen community.3 runtime with original icons and English-only text.\n"
+        f"workshop-draft uses the frozen {manifest['version']} runtime with original icons and English-only text.\n"
         "The GitHub source branch and draft release are tracked separately from Workshop upload.\n"
         "Read materials/publishing/PLAN.md and PREPARATION_STATUS.json before further work.\n"
         "materials is a documentation/tool kit, not a complete buildable source checkout.\n"
