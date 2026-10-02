@@ -2,6 +2,8 @@
 
 The current development candidate is **ZombieBuddy Community 2.3.3-community.4**, with the separate Windows installer **0.1.0-preview.3**. The normal Steam startup and simultaneous Java loading of three updated consumers were observed manually on 1 October. The binary release is still a draft; no Community Workshop item has been published.
 
+Workflow update, 2 October: the user now performs game tests manually. The former tester task and queue are retired; historical reports remain evidence. Complete source/local/log checks first, then propose only short manual steps for distinct remaining uncertainties. Do not repeat accepted loading solely for a new build, operator or report, or recreate session reservations and READY/GO submissions.
+
 ## Observed on the installed PZ 42.21.0 build
 
 The user's screenshot shows Community.4 and three active Java mods. The final console reports valid signatures and successful Java entry points for:
